@@ -28,5 +28,14 @@
     "Pending Task" : "Tâche en attente",
     "In queue" : "Dans la queue",
     "Mail" : "Courrier",
-    "View All" : "Voir tout"
+    "View All" : "Voir tout",
+    "Animals" : "Animaux",
+    "birth_year":"Année de naissance",
+    "capture_date": "date de capture",
+    "comment": "commentaire",
+    "death_date": "date de la mort",
+    "id": "identifiant",
+    "name": "Nom",
+    "list-animals": "List des animaux",
+    "add-animal": "ajouter un animal"
 }

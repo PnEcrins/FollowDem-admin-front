@@ -1,0 +1,63 @@
+<div [@routerTransition]>
+<div class="row">
+    <div class="col">
+        <ul class="list-inline">
+            <li class="list-inline-item"><a routerLink="/animals/animal-form" class="btn btn-success">{{'add-animal' | translate}}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-md-12">
+    <!--
+    <ag-grid-angular
+        style="width: 80%; height: 700px;"
+        class="ag-theme-balham"
+        [enableSorting]="true"
+        [enableFilter]="true"
+        [rowData]="rowData"
+        [columnDefs]="columnDefs"
+        rowSelection="multiple"
+        [paginationAutoPageSize]="true"
+        [pagination]="true"
+    >
+    </ag-grid-angular>
+    -->
+        <div class="card-header">{{'list-animals' | translate}}</div>
+        <div class="card-body table-responsive">
+            <table class="table">
+                <thead class="thead-inverse">
+                <tr>
+                    <th *ngFor="let key of cols">{{key | translate}}</th>
+                    <th>**</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of animals">
+                    <td *ngFor="let key of cols">{{item[key]}}</td>
+                    <td>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="javascript:void()" (click)="edit(item)"><i class="fa fa-edit"></i> </a></li>
+                        <li class="list-inline-item"><a href="javascript:void()" (click)="open(content, item)"><i class="fa fa-remove"></i></a></li>
+                        <li class="list-inline-item"><a href="javascript:void()" (click)="vew(item)"><i class="fa fa-eye"></i></a></li>
+                    </ul>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Voulez-vous confirmer la suppression</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="confirm('Save click')">Confirmer</button>
+    </div>
+</ng-template>
