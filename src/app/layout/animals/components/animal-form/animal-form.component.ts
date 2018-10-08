@@ -18,7 +18,8 @@ export class AnimalFormComponent implements OnInit {
           name: new FormControl('', Validators.required),
           birth_year: new FormControl('', Validators.required),
           capture_date: new FormControl('', Validators.required),
-          death_date: new FormControl()
+          death_date: new FormControl(),
+          comment: new FormControl()
       });
   }
   toDate(date): String {

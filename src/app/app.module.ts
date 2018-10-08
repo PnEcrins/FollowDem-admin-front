@@ -11,16 +11,11 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import {FormsModule} from '@angular/forms';
 import {AnimalsService} from './layout/animals/animals.service';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DeviceService} from './layout/devices/devices.service';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
-    /* for development
-    return new TranslateHttpLoader(
-        http,
-        '/start-angular/SB-Admin-BS4-Angular-6/master/dist/assets/i18n/',
-        '.json'
-    ); */
+
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 };
 
@@ -41,7 +36,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, AnimalsService],
+    providers: [AuthGuard, AnimalsService, DeviceService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

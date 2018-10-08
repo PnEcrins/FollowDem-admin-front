@@ -37,5 +37,8 @@
     "id": "identifiant",
     "name": "Nom",
     "list-animals": "List des animaux",
-    "add-animal": "ajouter un animal"
+    "add-animal": "ajouter un animal",
+    "Devices": "Devices",
+    "comment": "Commentaire",
+    "add-device": "Ajouter  un coli"
 }

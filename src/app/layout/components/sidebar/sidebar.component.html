@@ -8,6 +8,10 @@
             <i class="fa fa-fw fa-table"></i>&nbsp;
             <span>{{ 'Animals' | translate }}</span>
         </a>
+        <a [routerLink]="['/devices']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-table"></i>&nbsp;
+            <span>{{ 'Devices' | translate }}</span>
+        </a>
         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <i class="fa fa-plus"></i>&nbsp;
@@ -54,31 +58,6 @@
                         <li>
                             <a href="javascript:void(0)" (click)="changeLang('fr')">
                                 {{ 'French' | translate }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('ur')">
-                                {{ 'Urdu' | translate }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('es')">
-                                {{ 'Spanish' | translate }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('it')">
-                                {{ 'Italian' | translate }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('fa')">
-                                {{ 'Farsi' | translate }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('de')">
-                                {{ 'German' | translate }}
                             </a>
                         </li>
                     </ul>

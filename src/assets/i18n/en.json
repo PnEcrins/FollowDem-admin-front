@@ -37,5 +37,9 @@
     "id": "identifiant",
     "name": "name",
     "list-animals": "Animals list",
-    "add-animal": "add animal"
+    "add-animal": "add animal",
+    "Devices": "Devices",
+    "comment": "Comment",
+    "add-device": "Add device"
+
 }

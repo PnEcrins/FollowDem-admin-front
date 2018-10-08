@@ -8,20 +8,6 @@
 </div>
 <div class="row text-center">
     <div class="col-md-12">
-    <!--
-    <ag-grid-angular
-        style="width: 80%; height: 700px;"
-        class="ag-theme-balham"
-        [enableSorting]="true"
-        [enableFilter]="true"
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        rowSelection="multiple"
-        [paginationAutoPageSize]="true"
-        [pagination]="true"
-    >
-    </ag-grid-angular>
-    -->
         <div class="card-header">{{'list-animals' | translate}}</div>
         <div class="card-body table-responsive">
             <table class="table">
@@ -41,7 +27,6 @@
                         <li class="list-inline-item"><a href="javascript:void()" (click)="vew(item)"><i class="fa fa-eye"></i></a></li>
                     </ul>
                     </td>
-
                 </tr>
                 </tbody>
             </table>
@@ -49,7 +34,7 @@
 </div>
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+        <h4 class="modal-title" id="modal-basic-title">Notification!</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>

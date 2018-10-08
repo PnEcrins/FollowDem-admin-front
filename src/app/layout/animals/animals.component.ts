@@ -12,8 +12,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 })
 export class AnimalsComponent implements OnInit {
-  columnDefs = [];
-  rowData = [];
   animals = [];
   cols = [];
   currentItem;
@@ -54,11 +52,6 @@ export class AnimalsComponent implements OnInit {
               }
               rows.push(obj)
           }
-          console.log(columns);
-          console.log(rows);
-
-          this.columnDefs = columns;
-          this.rowData = rows;
       });
   }
 

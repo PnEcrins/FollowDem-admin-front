@@ -1,0 +1,35 @@
+<div [@routerTransition]>
+    <div class="row">
+        <div class="col">
+            <ul class="list-inline">
+                <li class="list-inline-item"><a routerLink="/devices/device-form" class="btn btn-success">{{'add-device' | translate}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div class="card-header">{{'list-devices' | translate}}</div>
+            <div class="card-body table-responsive">
+                <table class="table">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th *ngFor="let key of cols">{{key | translate}}</th>
+                        <th>**</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of devices">
+                        <td *ngFor="let key of cols">{{item[key]}}</td>
+                        <td>
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><a href="javascript:void()" (click)="edit(item)"><i class="fa fa-edit"></i> </a></li>
+                                <li class="list-inline-item"><a href="javascript:void()" (click)="open(content, item)"><i class="fa fa-remove"></i></a></li>
+                                <li class="list-inline-item"><a href="javascript:void()" (click)="vew(item)"><i class="fa fa-eye"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
