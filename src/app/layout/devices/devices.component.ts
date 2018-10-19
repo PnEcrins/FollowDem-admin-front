@@ -1,39 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import {DeviceService} from './devices.service';
 import {TranslateService} from '@ngx-translate/core';
+import {routerTransition} from '../../router.animations';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.scss']
+  styleUrls: ['./devices.component.scss'],
+    animations: [routerTransition()]
 })
 export class DevicesComponent implements OnInit {
-    animals = [];
-    cols = [];
-    devices;
+  animals = [];
+  cols = [];
+  devices;
+  currentItem;
+  modelRef;
   constructor(private deviceService: DeviceService,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
       this.setDevices();
   }
-    setDevices(){
+    setDevices() {
         this.deviceService.get().then(data => {
-            const keys = Object.keys(data[0]);
+           const keys = ['id', 'reference', 'comment']
             this.cols = keys;
-            const columns = [];
-            const rows = [];
             this.devices = data;
-            for ( const key of keys ) {
-                columns.push({headerName: this.translate.instant(key), field: key });
-            }
-            for ( const item of data ) {
-                const obj = {}
-                for ( const key of keys ) {
-                    obj[key] = item[key];
-                }
-                rows.push(obj);
-            }
+        });
+    }
+    open(content, item) {
+        this.modelRef = this.modalService.open(content);
+        this.currentItem = item;
+    }
+    confirm(key){
+        this.deviceService.delete(this.currentItem).then(data => {
+            console.log(data);
+            this.setDevices();
+            this.modelRef.close();
         });
     }
 }

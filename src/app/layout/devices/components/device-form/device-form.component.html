@@ -10,9 +10,7 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">{{'type-device'|translate}}</label>
                 <select class="form-control" formControlName="device_type_id" id="exampleFormControlSelect1">
-                    <option value="1">1xc</option>
-                    <option value="2">2xc</option>
-                    <option value="3">3xc</option>
+                    <option *ngFor="let device_type of device_types" [value]="device_type.id">{{device_type.name}}</option>
                 </select>
             </div>
             <div class="form-group">

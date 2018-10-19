@@ -12,6 +12,7 @@ import { AuthGuard } from './shared';
 import {FormsModule} from '@angular/forms';
 import {AnimalsService} from './layout/animals/animals.service';
 import {DeviceService} from './layout/devices/devices.service';
+import {AttributesService} from './layout/attributes/attributes.service';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -36,7 +37,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, AnimalsService, DeviceService],
+    providers: [AuthGuard, AnimalsService, DeviceService, AttributesService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

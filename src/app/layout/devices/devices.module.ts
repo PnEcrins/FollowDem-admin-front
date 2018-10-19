@@ -5,13 +5,15 @@ import { DeviceFormComponent } from './components/device-form/device-form.compon
 import {DevicesRoutingModule} from './devices-rooting.module';
 import {TranslateModule} from '@ngx-translate/core';
 import {ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
       DevicesRoutingModule,
       TranslateModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      NgbModule.forRoot(),
   ],
   declarations: [DevicesComponent, DeviceFormComponent]
 })

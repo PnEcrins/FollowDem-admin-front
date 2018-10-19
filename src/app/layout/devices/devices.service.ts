@@ -8,6 +8,10 @@ export class DeviceService {
         private http: HttpClient
     ) {
     }
+    get_device_types(): Promise<any> {
+        return this.http.get<any>(config.serverURL + '/api/device_types')
+            .toPromise();
+    }
     get(): Promise<any> {
         return this.http.get<any>(config.serverURL + '/api/devices')
             .toPromise();

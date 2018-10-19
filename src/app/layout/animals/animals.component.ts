@@ -35,23 +35,11 @@ export class AnimalsComponent implements OnInit {
   ngOnInit() {
       this.setAnimals();
   }
-  setAnimals(){
+  setAnimals() {
       this.animalService.get().then(data => {
-          let keys = Object.keys(data[0]);
+          const keys = ['id', 'name', 'birth_year', 'capture_date', 'death_date']
           this.cols = keys;
-          let columns= [];
-          let rows= [];
           this.animals = data;
-          for(let key of keys){
-              columns.push({headerName: this.translate.instant(key), field: key });
-          }
-          for(let item of data){
-              let obj = {}
-              for(let key of keys){
-                  obj[key] = item[key]
-              }
-              rows.push(obj)
-          }
       });
   }
 

@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col">
+        <form [formGroup]="attributeForm">
+            <div class="form-group">
+                <label>{{ 'name' | translate }}</label>
+                <div class="input-group">
+                    <input class="form-control" formControlName="name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ 'value_list' | translate }}</label>
+                <div class="input-group">
+                    <input class="form-control" formControlName="value_list">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ 'attribute_type' | translate }}</label>
+                <div class="input-group">
+                    <input class="form-control" formControlName="attribute_type">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ 'ordre' | translate }}</label>
+                <div class="input-group">
+                    <input class="form-control" formControlName="order">
+                </div>
+            </div>
+            <button type="submit" (click)="save()" class="btn btn-primary"> Envoyer </button>
+        </form>
+    </div>
+</div>

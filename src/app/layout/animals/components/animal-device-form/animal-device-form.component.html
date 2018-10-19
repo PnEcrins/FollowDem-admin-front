@@ -1,0 +1,53 @@
+<div [@routerTransition]>
+<div class="row">
+    <div class="col-md-12">
+        <form [formGroup]="animalDeviceForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">{{'device'|translate}}</label>
+                        <select class="form-control" formControlName="device_id" id="exampleFormControlSelect1">
+                            <option *ngFor="let device of devices" [value]="device.id">{{device.reference}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'start_at'|translate}}</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                   formControlName="start_at"
+                                   ngbDatepicker #start_at="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="start_at.toggle()" type="button">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>{{'ent_at'|translate}}</label>
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                   formControlName="end_at"
+                                   ngbDatepicker #end_at="ngbDatepicker">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" (click)="end_at.toggle()"
+                                        type="button">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>{{'comment'|translate}}</label>
+                <div class="input-group">
+                    <textarea class="form-control" rows="6" formControlName="comment"></textarea>
+                </div>
+            </div>
+            <button type="submit" (click)="save()" class="btn btn-primary"> Envoyer</button>
+        </form>
+    </div>
+</div>
+</div>

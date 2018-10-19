@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AnimalsComponent } from './animals.component';
-import {AnimalFormComponent} from './components/animal-form/animal-form.component';
+import { AnimalFormComponent } from './components/animal-form/animal-form.component';
+import { AnimalViewComponent } from './components/animal-view/animal-view.component';
 
 const routes: Routes = [
     {
@@ -9,8 +10,16 @@ const routes: Routes = [
         component: AnimalsComponent
     },
     {
+        path: 'animal-view',
+        component: AnimalViewComponent
+    },
+    {
         path: 'animal-form',
         component: AnimalFormComponent
+    },
+    {
+      path: 'animal-form',
+      component: AnimalFormComponent
     }
 ];
 

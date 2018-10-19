@@ -11,6 +11,7 @@ const routes: Routes = [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'animals', loadChildren: './animals/animals.module#AnimalsModule' },
             { path: 'devices', loadChildren: './devices/devices.module#DevicesModule' },
+            { path: 'attributes', loadChildren: './attributes/attributes.module#AttributesModule' },
         ]
     }
 ];
