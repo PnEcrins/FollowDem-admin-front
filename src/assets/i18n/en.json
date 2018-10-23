@@ -30,16 +30,16 @@
     "Mail" : "Mail",
     "View All" : "View All",
     "Animals" : "Animals",
-    "birth_year":"birth year",
-    "capture_date": "capture date",
-    "comment": "comment",
-    "death_date": "death date",
-    "id": "identifiant",
-    "name": "name",
+    "birth_year":"Birth year",
+    "capture_date": "Capture date",
+    "comment": "Comment",
+    "death_date": "Death date",
+    "id": "Identifiant",
+    "name": "Name",
     "list-animals": "Animals list",
-    "add-animal": "add animal",
+    "add-animal": "Add an animal",
     "Devices": "Devices",
     "comment": "Comment",
-    "add-device": "Add device"
+    "add-device": "Add a device"
 
 }
