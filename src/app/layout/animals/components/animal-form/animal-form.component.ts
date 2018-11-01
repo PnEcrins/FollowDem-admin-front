@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnimalsService} from '../../animals.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-form',
@@ -16,7 +17,8 @@ export class AnimalFormComponent implements OnInit {
     animal;
   constructor(private animalsService: AnimalsService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
       this.animalForm = new FormGroup({
@@ -75,6 +77,9 @@ export class AnimalFormComponent implements OnInit {
       const srvMethod: Promise<any> = !this.animal ? this.animalsService.post(formData) : this.animalsService.patch(formData);
       srvMethod.then(data => {
           this.router.navigate(['/animals']);
+      }, error => {
+          console.log(error);
+          this.toastr.error('Attention!', 'Merci de remplir les champs correctement!');
       });
   }
 

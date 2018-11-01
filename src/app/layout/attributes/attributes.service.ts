@@ -12,6 +12,10 @@ export class AttributesService {
         return this.http.post<any>(config.serverURL + '/api/attributes', data)
             .toPromise();
     }
+    patch(data: any): Promise<any> {
+        return this.http.patch<any>(config.serverURL + '/api/attributes', data)
+            .toPromise();
+    }
     get(): Promise<any> {
         return this.http.get<any>(config.serverURL + '/api/attributes')
             .toPromise();
@@ -20,6 +24,10 @@ export class AttributesService {
         let body = new HttpParams();
         body = body.append('id[]', item.id);
         return this.http.delete<any>(config.serverURL + '/api/attributes', {params: body})
+            .toPromise();
+    }
+    get_by_id(id: any) {
+        return this.http.get<any>(config.serverURL + '/api/attributes/' + id, {})
             .toPromise();
     }
 }

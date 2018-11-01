@@ -12,6 +12,7 @@ const routes: Routes = [
             { path: 'animals', loadChildren: './animals/animals.module#AnimalsModule' },
             { path: 'devices', loadChildren: './devices/devices.module#DevicesModule' },
             { path: 'attributes', loadChildren: './attributes/attributes.module#AttributesModule' },
+            { path: 'type-devices', loadChildren: './type-devices/type-devices.module#TypeDeviceModule' },
         ]
     }
 ];

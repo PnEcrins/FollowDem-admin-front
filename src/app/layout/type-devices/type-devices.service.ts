@@ -3,35 +3,31 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import { config } from '../../settings';
 
 @Injectable()
-export class DeviceService {
+export class TypeDeviceService {
     constructor(
         private http: HttpClient
     ) {
     }
-    get_device_types(): Promise<any> {
-        return this.http.get<any>(config.serverURL + '/api/device_types')
-            .toPromise();
-    }
     get_by_id(id: any) {
-        return this.http.get<any>(config.serverURL + '/api/devices/' + id, {})
+        return this.http.get<any>(config.serverURL + '/api/device_types/' + id, {})
             .toPromise();
     }
     get(): Promise<any> {
-        return this.http.get<any>(config.serverURL + '/api/devices')
+        return this.http.get<any>(config.serverURL + '/api/device_types')
             .toPromise();
     }
     post(data: any): Promise<any> {
-        return this.http.post<any>(config.serverURL + '/api/devices', data)
+        return this.http.post<any>(config.serverURL + '/api/device_types', data)
             .toPromise();
     }
     patch(data: any): Promise<any> {
-        return this.http.patch<any>(config.serverURL + '/api/devices', data)
+        return this.http.patch<any>(config.serverURL + '/api/device_types', data)
             .toPromise();
     }
     delete(item: any): Promise<any> {
         let body = new HttpParams();
         body = body.append('id[]', item.id);
-        return this.http.delete<any>(config.serverURL + '/api/devices', {params: body})
+        return this.http.delete<any>(config.serverURL + '/api/device_types', {params: body})
             .toPromise();
     }
 }

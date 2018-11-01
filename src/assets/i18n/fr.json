@@ -50,6 +50,11 @@
     "end_at": "Date de début",
     "start_at": "Date de fin",
     "value": "Valeur",
-    "attribute": "Attribut"
+    "attribute": "Attribut",
+    "list-attributes": " List des attributes",
+    "add-attribute": "Ajouter un attribut",
+    "type-devices": "Type de dispositifs",
+    "add-type-device": "Ajouter un type de dispositif",
+    "devices": "Dispositifs"
 
 }

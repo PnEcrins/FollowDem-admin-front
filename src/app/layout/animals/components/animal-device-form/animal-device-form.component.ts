@@ -3,6 +3,7 @@ import {DeviceService} from '../../../devices/devices.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnimalsService} from '../../animals.service';
 import {routerTransition} from '../../../../router.animations';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-device-form',
@@ -11,12 +12,13 @@ import {routerTransition} from '../../../../router.animations';
   animations: [routerTransition()]
 })
 export class AnimalDeviceFormComponent implements OnInit {
-    @Input() animal;
-    @Output() changed = new EventEmitter<boolean>();
+   @Input() animal;
+   @Output() changed = new EventEmitter<any>();
    devices;
    animalDeviceForm: FormGroup;
   constructor(private deviceService: DeviceService,
-              private animalsService: AnimalsService) { }
+              private animalsService: AnimalsService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
       this.animalDeviceForm = new FormGroup({
@@ -41,7 +43,12 @@ export class AnimalDeviceFormComponent implements OnInit {
         formData.animal_id = this.animal.id;
         this.animalsService.post_animal_device(formData).then(data => {
             this.changed.emit(data);
+        }, error => {
+            console.log(error);
+            this.changed.emit({ animal: this.animal, error: 'error' });
+            this.toastr.error('Attention!', 'Un animal peut avoir seulement un dispositif de même type dans une période!');
         });
     }
+
 
 }

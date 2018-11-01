@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">{{'attribute'|translate}}</label>
+                            <label class="with-required">{{'attribute'|translate}}</label>
                             <select class="form-control" formControlName="attribute_id" id="exampleFormControlSelect1">
                                 <option *ngFor="let attribute of attributes" [value]="attribute.id">{{attribute.name}}</option>
                             </select>
@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>{{'value'|translate}}</label>
+                            <label class="with-required">{{'value'|translate}}</label>
                             <div class="input-group">
                                 <input class="form-control"  formControlName="value" />
                             </div>

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AnimalsService} from '../../animals.service';
 import {DeviceService} from '../../../devices/devices.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-animal-view',
@@ -25,7 +26,8 @@ export class AnimalViewComponent implements OnInit {
               private route: ActivatedRoute,
               private animalsService: AnimalsService,
               private deviceService: DeviceService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
       this.sub = this.route.params.subscribe(params => {
@@ -44,6 +46,9 @@ export class AnimalViewComponent implements OnInit {
       });
   }
   get_output(animal: any) {
+      if(animal.error) {
+          return;
+      }
     this.animal = animal;
     this.add_device = false;
     this.add_attribute = false;
