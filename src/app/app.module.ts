@@ -15,6 +15,7 @@ import {DeviceService} from './layout/devices/devices.service';
 import {TypeDeviceService} from './layout/type-devices/type-devices.service';
 import {AttributesService} from './layout/attributes/attributes.service';
 import {ToastrModule} from 'ngx-toastr';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -29,6 +30,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
+        NgxSpinnerModule,
         ToastrModule.forRoot(), // ToastrModule added
         TranslateModule.forRoot({
             loader: {

@@ -12,6 +12,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AnimalViewComponent } from './components/animal-view/animal-view.component';
 import { AnimalDeviceFormComponent } from './components/animal-device-form/animal-device-form.component';
 import { AnimalAttributeFormComponent } from './components/animal-attribute-form/animal-attribute-form.component';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 @NgModule({
     imports: [
