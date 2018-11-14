@@ -1,17 +1,33 @@
+import {
+    CanActivate,
+    CanActivateChild,
+    ActivatedRouteSnapshot,
+    RouterStateSnapshot
+} from '@angular/router';
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
-    constructor(private router: Router) {}
+export class AuthGuard implements CanActivate, CanActivateChild {
+    constructor(private _authService: AuthService, private _router: Router) {}
 
-    canActivate() {
-        if (localStorage.getItem('isLoggedin')) {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (this._authService.getToken() === null) {
+            this._router.navigate(['/login']);
+            console.log('sss');
+            return false;
+        } else {
             return true;
         }
+    }
 
-        this.router.navigate(['/login']);
-        return false;
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        if (this._authService.getToken() === null) {
+            this._router.navigate(['/login']);
+            return false;
+        } else {
+            return true;
+        }
     }
 }

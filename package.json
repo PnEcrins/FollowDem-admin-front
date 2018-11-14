@@ -32,6 +32,8 @@
         "core-js": "^2.5.5",
         "font-awesome": "^4.7.0",
         "ng2-charts": "^1.6.0",
+        "ng2-cookies": "^1.0.12",
+        "ngx-cookie-service": "^2.0.0",
         "ngx-spinner": "^6.1.2",
         "ngx-toastr": "^9.1.1",
         "rxjs": "^6.1.0",

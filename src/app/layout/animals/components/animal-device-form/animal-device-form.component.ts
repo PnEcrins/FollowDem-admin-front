@@ -36,7 +36,7 @@ export class AnimalDeviceFormComponent implements OnInit {
             return new Date('' + date.year + '-' + date.month + '-' + date.day).toISOString();
         return date;
     }
-    save(){
+    save() {
         const formData = this.animalDeviceForm.getRawValue();
         formData.start_at = this.toDate(this.animalDeviceForm.controls['start_at'].value);
         formData.end_at = this.toDate(this.animalDeviceForm.controls['end_at'].value);
@@ -49,6 +49,8 @@ export class AnimalDeviceFormComponent implements OnInit {
             this.toastr.error('Attention!', 'Un animal peut avoir seulement un dispositif de même type dans une période!');
         });
     }
-
+    cancel() {
+        this.changed.emit({animal: this.animal, error: 'cancelDevice' });
+    }
 
 }

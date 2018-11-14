@@ -53,6 +53,7 @@
     "attribute": "Attribut",
     "list-attributes": " List des attributes",
     "add-attribute": "Ajouter un attribut",
+    "add-device": "Ajouter un dispositif",
     "type-devices": "Type de dispositifs",
     "add-type-device": "Ajouter un type de dispositif",
     "devices": "Dispositifs"

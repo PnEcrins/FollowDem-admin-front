@@ -11,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class AnimalAttributeFormComponent implements OnInit {
     @Input() animal;
-    @Output() changed = new EventEmitter<boolean>();
+    @Output() changed = new EventEmitter<any>();
     attributes;
     animalAttributeForm: FormGroup;
   constructor(private attributeService: AttributesService,
@@ -36,6 +36,9 @@ export class AnimalAttributeFormComponent implements OnInit {
           console.log(error);
           this.toastr.error('Attention!', 'Merci de remplir les champs correctement!');
       });
+  }
+  cancel() {
+      this.changed.emit({animal: this.animal, error: 'cancelAttr' });
   }
 
 }

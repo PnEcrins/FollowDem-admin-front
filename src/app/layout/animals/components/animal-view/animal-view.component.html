@@ -37,7 +37,7 @@
                 <tbody>
                 <tr *ngFor="let item of animal.animal_attributes">
                     <td *ngFor="let key of attribute_cols">
-                        {{item[key]}}
+                        {{ item[key].name?item[key].name:item[key] }}
                     </td>
                     <td>
                         <ul class="list-inline">
@@ -63,7 +63,9 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let item of animal.animal_devices">
-                    <td *ngFor="let key of device_cols">{{item[key]}}</td>
+                    <td *ngFor="let key of device_cols">
+                        {{ item[key].reference?item[key].reference:item[key] }}
+                    </td>
                     <td>
                         <ul class="list-inline">
                             <li class="list-inline-item"><a href="javascript:void()" (click)="open(content,null , item)"><i class="fa fa-remove"></i></a></li>

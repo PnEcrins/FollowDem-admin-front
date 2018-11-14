@@ -21,6 +21,7 @@ export class AnimalsComponent implements OnInit {
                private translate: TranslateService,
               private modalService: NgbModal,
               private spinner: NgxSpinnerService) {
+      this.setAnimals();
   }
 
   open(content, item) {
@@ -35,7 +36,6 @@ export class AnimalsComponent implements OnInit {
       });
   }
   ngOnInit() {
-      this.setAnimals();
   }
   setAnimals() {
       this.spinner.show();
@@ -45,6 +45,9 @@ export class AnimalsComponent implements OnInit {
           this.animals = data;
           this.spinner.hide();
 
-  });
-
+      }, error => {
+          this.spinner.hide();
+          console.log(error);
+      });
+  }
 }

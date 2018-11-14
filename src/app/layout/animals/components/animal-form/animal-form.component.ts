@@ -15,6 +15,7 @@ export class AnimalFormComponent implements OnInit {
     id: number;
     private sub: any;
     animal;
+
   constructor(private animalsService: AnimalsService,
               private router: Router,
               private route: ActivatedRoute,

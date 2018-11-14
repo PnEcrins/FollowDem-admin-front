@@ -17,7 +17,7 @@ export class AnimalViewComponent implements OnInit {
   devices;
   add_device = false;
   add_attribute  = false;
-  device_cols = ['id', 'start_at', 'end_at', 'comment'];
+  device_cols = ['id', 'device', 'start_at', 'end_at', 'comment'];
   attribute_cols = ['id', 'attribute', 'value'];
   modelRef;
   current_animal_device;
@@ -46,7 +46,13 @@ export class AnimalViewComponent implements OnInit {
       });
   }
   get_output(animal: any) {
-      if(animal.error) {
+      if(animal.error === 'cancelAttr') {
+          this.add_attribute = false;
+          return;
+      }else if(animal.error === 'cancelDevice'){
+          this.add_device = false;
+          return;
+      }else if( animal.error) {
           return;
       }
     this.animal = animal;
