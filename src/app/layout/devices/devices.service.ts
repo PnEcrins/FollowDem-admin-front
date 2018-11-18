@@ -16,8 +16,9 @@ export class DeviceService {
         return this.http.get<any>(config.serverURL + '/api/devices/' + id, {})
             .toPromise();
     }
-    get(): Promise<any> {
-        return this.http.get<any>(config.serverURL + '/api/devices')
+    get(key = ''): Promise<any> {
+        const options = key ? { params: new HttpParams().set('key', key)} : {};
+        return this.http.get<any>(config.serverURL + '/api/devices', options)
             .toPromise();
     }
     post(data: any): Promise<any> {

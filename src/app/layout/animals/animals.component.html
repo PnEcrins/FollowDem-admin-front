@@ -3,6 +3,7 @@
     <div class="col">
         <ul class="list-inline">
             <li class="list-inline-item"><a routerLink="/animals/animal-form" class="btn btn-success">{{'add-animal' | translate}}</a></li>
+            <li class="list-inline-item"><input type="text" class="form-control" placeholder="rechercher  par nom" #box (keyup.enter)="setAnimals(box.value)" /></li>
         </ul>
     </div>
 </div>

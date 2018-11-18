@@ -74,10 +74,21 @@ export class AuthService {
                     this.setCurrentUser(userForFront);
                     this.loginError = false;
                     this.router.navigate(['']);
+                    this.isLoading = false;
                     console.log(this._cookie.get('token'));
                 },
                 error => {
                     this.loginError = true;
+                    this.isLoading = false;
+                }
+            );
+    }
+    logOut() {
+
+        this._http
+            .post<any>(`${config.serverURL}/auth/logout`,{})
+            .subscribe(data => {
+                    console.log(data);
                 }
             );
     }
@@ -98,7 +109,12 @@ export class AuthService {
     }
 
     logout() {
-        this._cookie.delete('token', '/');
+        this._http
+            .post<any>(`${config.serverURL}/auth/logout`, { })
+            .subscribe(data => {
+                    console.log(data);
+                }
+            );
         this.router.navigate(['/login']);
     }
 

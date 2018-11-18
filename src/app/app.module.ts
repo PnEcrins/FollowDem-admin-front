@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpClientXsrfModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,10 @@ export const createTranslateLoader = (http: HttpClient) => {
 
 @NgModule({
     imports: [
+        HttpClientXsrfModule.withOptions({
+            cookieName: 'token',
+            headerName: 'token'
+        }),
         CommonModule,
         BrowserModule,
         BrowserAnimationsModule,

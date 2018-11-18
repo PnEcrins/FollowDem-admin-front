@@ -15,7 +15,7 @@ export class AttributeFormComponent implements OnInit {
     attributeForm: FormGroup;
     sub; id; attribute;
     constructor(
-        private router: Router,
+        public router: Router,
         private attributesService: AttributesService,
         private route: ActivatedRoute,
         private toastr: ToastrService

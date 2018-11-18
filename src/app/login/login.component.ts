@@ -11,7 +11,8 @@ import {AuthService} from '../shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
     public casLogin: boolean;
-    constructor(private _authService: AuthService) {
+
+    constructor(public _authService: AuthService) {
     }
 
     ngOnInit() {

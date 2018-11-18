@@ -11,7 +11,7 @@ import {AuthService, User} from '../../../shared/services/auth.service';
 export class HeaderComponent implements OnInit {
     pushRightClass: string = 'push-right';
     public currentUser: User;
-    constructor(private translate: TranslateService, public router: Router, private _authService: AuthService) {
+    constructor(private translate: TranslateService, public router: Router, public _authService: AuthService) {
 
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');

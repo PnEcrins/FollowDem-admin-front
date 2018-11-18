@@ -64,6 +64,16 @@ export class AnimalViewComponent implements OnInit {
         this.current_animal_device = animal_device;
         this.current_animal_attribute = animal_attribute;
     }
+    edit(animal_attribute, animal_device) {
+      if (animal_device) {
+          this.add_device = true;
+          this.current_animal_device = animal_device;
+      }
+      else if (animal_attribute){
+        this.add_attribute = true;
+        this.current_animal_attribute = animal_attribute;
+      }
+    }
     confirm(key) {
       if( this.current_animal_device )
         this.animalsService.delete_animal_device(this.current_animal_device).then(data => {

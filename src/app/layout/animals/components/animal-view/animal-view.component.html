@@ -25,7 +25,7 @@
     <div class="col">
         <h1>Attribues</h1>
         <button type="button" (click)="add_attribute?add_attribute=false:add_attribute=true" class="btn btn-success">{{'add_attribute' | translate}}</button>
-        <app-animal-attribute-form *ngIf="add_attribute" [animal]="animal" (changed)="get_output($event)"></app-animal-attribute-form>
+        <app-animal-attribute-form *ngIf="add_attribute" [animal]="animal" [animal_attribute]="current_animal_attribute" (changed)="get_output($event)"></app-animal-attribute-form>
         <div class="card-body table-responsive">
             <table class="table">
                 <thead class="thead-inverse">
@@ -42,6 +42,7 @@
                     <td>
                         <ul class="list-inline">
                             <li class="list-inline-item"><a href="javascript:void()" (click)="open(content, item, null)"><i class="fa fa-remove"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void()" (click)="edit(item, null)"><i class="fa fa-edit"></i> </a></li>
                         </ul>
                     </td>
                 </tr>
@@ -52,7 +53,7 @@
     <div class="col">
         <h1>Devices</h1>
         <button type="button" (click)="add_device?add_device=false:add_device=true" class="btn btn-success">{{'add_device' | translate}}</button>
-        <app-animal-device-form *ngIf="add_device" [animal]="animal" (changed)="get_output($event)"></app-animal-device-form>
+        <app-animal-device-form *ngIf="add_device" [animal]="animal" [animal_device]="current_animal_device"  (changed)="get_output($event)"></app-animal-device-form>
         <div class="card-body table-responsive">
             <table class="table">
                 <thead class="thead-inverse">
@@ -69,6 +70,7 @@
                     <td>
                         <ul class="list-inline">
                             <li class="list-inline-item"><a href="javascript:void()" (click)="open(content,null , item)"><i class="fa fa-remove"></i></a></li>
+                            <li class="list-inline-item"><a href="javascript:void()" (click)="edit(null, item)"><i class="fa fa-edit"></i> </a></li>
                         </ul>
                     </td>
                 </tr>

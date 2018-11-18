@@ -37,9 +37,10 @@ export class AnimalsComponent implements OnInit {
   }
   ngOnInit() {
   }
-  setAnimals() {
+
+  setAnimals(key = '') {
       this.spinner.show();
-      this.animalService.get().then(data => {
+      this.animalService.get(key).then(data => {
           const keys = ['id', 'name', 'birth_year', 'capture_date', 'death_date']
           this.cols = keys;
           this.animals = data;

@@ -23,8 +23,8 @@ export class DevicesComponent implements OnInit {
   ngOnInit() {
       this.setDevices();
   }
-    setDevices() {
-        this.deviceService.get().then(data => {
+    setDevices(key = '') {
+        this.deviceService.get(key).then(data => {
            const keys = ['id', 'reference', 'comment']
             this.cols = keys;
             this.devices = data;

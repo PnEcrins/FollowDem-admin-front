@@ -8,8 +8,10 @@ export class AnimalsService {
         private http: HttpClient
     ) {
     }
-    get(): Promise<any> {
-        return this.http.get<any>(config.serverURL + '/api/animals')
+
+    get(key = ''): Promise<any> {
+        const options = key ? { params: new HttpParams().set('key', key)} : {};
+        return this.http.get<any>(config.serverURL + '/api/animals', options)
             .toPromise();
     }
     get_by_id(id: any) {

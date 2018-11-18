@@ -13,6 +13,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class AnimalDeviceFormComponent implements OnInit {
    @Input() animal;
+   @Input() animal_device;
    @Output() changed = new EventEmitter<any>();
    devices;
    animalDeviceForm: FormGroup;
@@ -30,17 +31,37 @@ export class AnimalDeviceFormComponent implements OnInit {
       this.deviceService.get().then(data => {
           this.devices = data;
       });
+      if(this.animal_device)
+          this.setAnimalDeviceFrom();
   }
     toDate(date): String {
         if( (typeof date === "object") && (date !== null) )
             return new Date('' + date.year + '-' + date.month + '-' + date.day).toISOString();
         return date;
     }
+    setAnimalDeviceFrom() {
+        this.animalDeviceForm.get('device_id').setValue(this.animal_device.device.id);
+        this.animalDeviceForm.get('comment').setValue(this.animal_device.comment);
+        this.animalDeviceForm.get('start_at').setValue({
+            year: new Date(this.animal_device.start_at).getFullYear(),
+            month: new Date(this.animal_device.start_at).getMonth() + 1,
+            day: new Date(this.animal_device.start_at).getDate(),
+        });
+        this.animalDeviceForm.get('end_at').setValue({
+            year: new Date(this.animal_device.end_at).getFullYear(),
+            month: new Date(this.animal_device.end_at).getMonth() + 1,
+            day: new Date(this.animal_device.end_at).getDate(),
+        });
+
+
+    }
     save() {
         const formData = this.animalDeviceForm.getRawValue();
         formData.start_at = this.toDate(this.animalDeviceForm.controls['start_at'].value);
         formData.end_at = this.toDate(this.animalDeviceForm.controls['end_at'].value);
         formData.animal_id = this.animal.id;
+        if(this.animal_device)
+            formData.id = this.animal_device.id
         this.animalsService.post_animal_device(formData).then(data => {
             this.changed.emit(data);
         }, error => {

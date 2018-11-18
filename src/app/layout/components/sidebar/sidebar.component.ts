@@ -13,11 +13,11 @@ export class SidebarComponent implements OnInit{
     collapsed: boolean = false;
     showMenu: string = '';
     pushRightClass: string = 'push-right';
-
+    _authService: AuthService
     public currentUser: User;
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService, public router: Router, private _authService: AuthService) {
+    constructor(private translate: TranslateService, public router: Router) {
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();

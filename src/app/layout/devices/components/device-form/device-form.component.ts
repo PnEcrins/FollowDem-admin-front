@@ -14,7 +14,7 @@ export class DeviceFormComponent implements OnInit {
   device_types;
   sub; id; device;
   constructor(
-      private router: Router,
+      public router: Router,
       private deviceService: DeviceService,
       private route: ActivatedRoute,
       private toastr: ToastrService

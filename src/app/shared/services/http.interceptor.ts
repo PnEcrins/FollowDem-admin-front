@@ -3,10 +3,11 @@ import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse} from
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import {Observable} from 'rxjs/index';
-import { map, filter, tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import {ToastrService} from 'ngx-toastr';
 @Injectable()
 export class MyCustomInterceptor implements HttpInterceptor {
-    constructor(public inj: Injector, public router: Router) {
+    constructor(public inj: Injector, public router: Router,  private toastr: ToastrService) {
     }
 
     private handleError(error: Response | any) {
@@ -23,14 +24,20 @@ export class MyCustomInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const auth = this.inj.get(AuthService);
-        //if (!auth.getToken()) {
-            //this.router.navigate(['/login']);
-        //}
+
         request = request.clone({
             withCredentials: true
         });
-
-        return next.handle(request);
+        return  next.handle(request).pipe(tap(event => {
+            if (event instanceof HttpResponse) {
+                if (request.method === 'POST') {
+                    this.toastr.success('Success!', '');
+                }
+            }
+        }, error => {
+            if (error.statusText === 'FORBIDDEN') {
+                this.router.navigate(['/login']);
+            }
+        }));
     }
 }

@@ -3,6 +3,7 @@
         <div class="col">
             <ul class="list-inline">
                 <li class="list-inline-item"><a routerLink="/devices/device-form" class="btn btn-success">{{'add-device' | translate}}</a></li>
+                <li class="list-inline-item"><input type="text" class="form-control" placeholder="rechercher  par référence" #box (keyup.enter)="setDevices(box.value)" /></li>
             </ul>
         </div>
     </div>
