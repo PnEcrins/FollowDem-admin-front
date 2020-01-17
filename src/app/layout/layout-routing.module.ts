@@ -8,11 +8,10 @@ const routes: Routes = [
         component: LayoutComponent,
         children: [
             { path: '', redirectTo: 'animals', pathMatch: 'prefix' },
-            { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'animals', loadChildren: './animals/animals.module#AnimalsModule' },
-            { path: 'devices', loadChildren: './devices/devices.module#DevicesModule' },
-            { path: 'attributes', loadChildren: './attributes/attributes.module#AttributesModule' },
-            { path: 'type-devices', loadChildren: './type-devices/type-devices.module#TypeDeviceModule' },
+            { path: 'animals', loadChildren: () => import('./animals/animals.module').then(m => m.AnimalsModule) },
+            { path: 'devices', loadChildren: () => import('./devices/devices.module').then(m => m.DevicesModule) },
+            { path: 'attributes', loadChildren: () => import('./attributes/attributes.module').then(m => m.AttributesModule) },
+            { path: 'type-devices', loadChildren: () => import('./type-devices/type-devices.module').then(m => m.TypeDeviceModule) },
         ]
     }
 ];

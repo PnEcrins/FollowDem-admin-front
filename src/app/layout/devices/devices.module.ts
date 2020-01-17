@@ -13,7 +13,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
       DevicesRoutingModule,
       TranslateModule,
       ReactiveFormsModule,
-      NgbModule.forRoot(),
+      NgbModule,
   ],
   declarations: [DevicesComponent, DeviceFormComponent]
 })

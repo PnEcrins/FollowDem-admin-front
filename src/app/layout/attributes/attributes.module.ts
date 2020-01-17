@@ -13,7 +13,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AttributesRoutingModule,
       TranslateModule,
       ReactiveFormsModule,
-      NgbModule.forRoot(),
+      NgbModule,
   ],
   declarations: [
       AttributesComponent,

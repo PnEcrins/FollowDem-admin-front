@@ -13,7 +13,7 @@ import {TypeDevicesRoutingModule} from './type-devices-rooting.module';
       TypeDevicesRoutingModule,
       TranslateModule,
       ReactiveFormsModule,
-      NgbModule.forRoot(),
+      NgbModule,
   ],
   declarations: [TypeDeviceComponent, TypeDeviceFormComponent]
 })

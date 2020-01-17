@@ -41,7 +41,7 @@ export class AnimalsComponent implements OnInit {
   setAnimals(key = '') {
       this.spinner.show();
       this.animalService.get(key).then(data => {
-          const keys = ['id', 'name', 'birth_year', 'capture_date', 'death_date']
+          const keys = [ 'name', 'birth_year', 'capture_date', 'death_date']
           this.cols = keys;
           this.animals = data;
           this.spinner.hide();
