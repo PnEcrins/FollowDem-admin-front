@@ -38,7 +38,7 @@ export const createTranslateLoader = (http: HttpClient) => {
         HttpClientModule,
         FormsModule,
         NgxSpinnerModule,
-        ToastrModule.forRoot(), // ToastrModule added
+        ToastrModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

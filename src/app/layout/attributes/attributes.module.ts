@@ -6,6 +6,7 @@ import {AttributeFormComponent} from './components/attribute-form/attribute-form
 import {TranslateModule} from '@ngx-translate/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
       TranslateModule,
       ReactiveFormsModule,
       NgbModule,
+      SharedModule
   ],
   declarations: [
       AttributesComponent,

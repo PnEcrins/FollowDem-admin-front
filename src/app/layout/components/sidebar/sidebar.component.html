@@ -1,112 +1,21 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
-        <!--
-        <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
-            <span>{{ 'Dashboard' | translate }}</span>
-        </a>
-        -->
         <a [routerLink]="['/animals']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-paw fa-table"></i>&nbsp;
-            <span>{{ 'Animals' | translate }}</span>
+            <i class="fa fa-paw "></i>&nbsp;
+            <span>{{ 'animals' | translate }}</span>
         </a>
         <a [routerLink]="['/devices']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-table"></i>&nbsp;
-            <span>{{ 'Devices' | translate }}</span>
+            <i class="fa fa-fw fa-shield"></i>&nbsp;
+            <span>{{ 'devices' | translate }}</span>
         </a>
         <a [routerLink]="['/attributes']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-table"></i>&nbsp;
-            <span>{{ 'Attributes' | translate }}</span>
+            <i class="fa fa-fw fa-tasks"></i>&nbsp;
+            <span>{{ 'attributes' | translate }}</span>
         </a>
         <a [routerLink]="['/type-devices']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-table"></i>&nbsp;
-            <span>{{ 'type-devices' | translate }}</span>
-        </a>
-        <!--
-        <div class="nested-menu">
-            <a class="list-group-item" (click)="addExpandClass('pages')">
-                <i class="fa fa-plus"></i>&nbsp;
-                <span>{{ 'Menu' | translate }}</span>
-            </a>
-
-            <li class="nested" [class.expand]="showMenu === 'pages'">
-                <ul class="submenu">
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-monument"></i>&nbsp;
-                            <span>{{ 'Submenu' | translate }}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-monument"></i>&nbsp;
-                            <span>{{ 'Submenu' | translate }}</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            <i class="fa fa-monument"></i>&nbsp;
-                            <span>{{ 'Submenu' | translate }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-        </div>
-         -->
-        <div class="header-fields">
-            <a (click)="rltAndLtr()" class="list-group-item">
-                <span><i class="fa fa-arrows-h"></i>&nbsp; RTL/LTR</span>
-            </a>
-            <div class="nested-menu">
-                <a class="list-group-item" (click)="addExpandClass('languages')">
-                    <span><i class="fa fa-language"></i>&nbsp; {{ 'Language' | translate }} <b class="caret"></b></span>
-                </a>
-                <li class="nested" [class.expand]="showMenu === 'languages'">
-                    <ul class="submenu">
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('en')">
-                                {{ 'English' | translate }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" (click)="changeLang('fr')">
-                                {{ 'French' | translate }}
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <div class="nested-menu">
-                <a class="list-group-item" (click)="addExpandClass('profile')">
-                    <span><i class="fa fa-user"></i>&nbsp;</span>
-                </a>
-                <li class="nested" [class.expand]="showMenu === 'profile'">
-                    <ul class="submenu">
-                        <li>
-                            <a href="javascript:void(0)">
-                                <span><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a (click)="_authService.logout()">
-                                <span><i class="fa fa-fw fa-envelope"></i> {{ 'LogOut' | translate }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)">
-                                <span><i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a [routerLink]="['/login']" (click)="onLoggedout()">
-                                <span><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-        </div>
+            <i class="fa fa-fw fa-cog"></i>&nbsp;
+            <span>{{ 'type_devices' | translate }}</span>
+        </a> 
     </div>
     <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
         <i class="fa fa-fw fa-angle-double-left"></i>&nbsp;

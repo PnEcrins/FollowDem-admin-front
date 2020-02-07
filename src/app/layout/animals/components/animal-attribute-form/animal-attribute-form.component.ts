@@ -1,52 +1,82 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AnimalsService} from '../../animals.service';
-import {AttributesService} from '../../../attributes/attributes.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AttributesService } from '../../../attributes/attributes.service';
+import _ from 'lodash';
 
 @Component({
-  selector: 'app-animal-attribute-form',
-  templateUrl: './animal-attribute-form.component.html',
-  styleUrls: ['./animal-attribute-form.component.scss']
+	selector: 'app-animal-attribute-form',
+	templateUrl: './animal-attribute-form.component.html',
+	styleUrls: [ './animal-attribute-form.component.scss' ]
 })
 export class AnimalAttributeFormComponent implements OnInit {
-    @Input() animal;
-    @Input() animal_attribute;
-    @Output() changed = new EventEmitter<any>();
-    attributes;
-    animalAttributeForm: FormGroup;
-  constructor(private attributeService: AttributesService,
-              private animalsService: AnimalsService,
-              private toastr: ToastrService) { }
+	animal_attributes = [];
+	showAttributeForm = false;
+	attribute_cols = [ 'id', 'attribute', 'value' ];
+	addAttributeError: boolean = false;
+	closedAlertAttribute = false;
+	attributes = [];
+	attribute_values = [];
+	attributeForm: FormGroup;
+	@Input() editMode: boolean;
 
-  ngOnInit() {
-      this.attributeService.get().then(data => {
-          this.attributes = data;
-      });
-      this.animalAttributeForm = new FormGroup({
-          attribute_id: new FormControl('', Validators.required),
-          value: new FormControl('', Validators.required)
-      });
-      console.log(this.animal_attribute);
-      if(this.animal_attribute){
-          this.animalAttributeForm.patchValue(this.animal_attribute);
-          this.animalAttributeForm.controls['attribute_id'].setValue(this.animal_attribute.attribute.id);
-      }
-  }
-  save() {
-    const formData =  this.animalAttributeForm.getRawValue();
-      if(this.animal_attribute)
-          formData.id = this.animal_attribute.id;
-      formData.animal_id = this.animal.id;
-      this.animalsService.post_animal_attribute(formData).then(data => {
-          this.changed.emit(data);
-      }, error => {
-          console.log(error);
-          this.toastr.error('Attention!', 'Merci de remplir les champs correctement!');
-      });
-  }
-  cancel() {
-      this.changed.emit({animal: this.animal, error: 'cancelAttr' });
-  }
+	constructor(private attributeService: AttributesService, private fb: FormBuilder) {}
 
+	ngOnInit() {
+		this.attributeForm = this.fb.group({
+			attributeSelect: [ null, Validators.required ],
+			value: [ { value: '', disabled: true }, Validators.required ]
+		});
+
+		this.attributeForm.controls['attributeSelect'].valueChanges.subscribe((val) => {
+			if (val) {
+				this.attributes.forEach((attribute) => {
+					if (attribute.id == val.id) this.attribute_values = attribute.value_list.split(';');
+				});
+				this.attributeForm.controls['value'].enable();
+			}
+		});
+
+		this.attributeService.get().then((attributes) => {
+			this.attributes = attributes;
+		});
+    }
+    
+	onAddAttribute() {
+		this.showAttributeForm = true;
+	}
+
+	onCancelAttribute() {
+		this.attributeForm.reset();
+		this.showAttributeForm = false;
+		this.closedAlertAttribute = true;
+		this.attributeForm.controls['value'].disable();
+	}
+
+	onSaveAttribute(attributeTodAdd) {
+		if (this.attributeForm.valid) {
+			attributeTodAdd.id = attributeTodAdd.attributeSelect.id;
+			attributeTodAdd.attribute = attributeTodAdd.attributeSelect.name;
+			let attrib_exist = this.animal_attributes.find((item) => {
+				return item.id == attributeTodAdd.id;
+			});
+			if (attrib_exist) {
+				this.addAttributeError = true;
+				this.closedAlertAttribute = false;
+			} else {
+				this.animal_attributes.push(attributeTodAdd);
+				this.attributeForm.reset();
+				this.showAttributeForm = false;
+				this.closedAlertAttribute = true;
+				this.attributeForm.controls['value'].disable();
+			}
+		}
+	}
+
+	onDeleteAttribute(attributeToDelete: any) {
+		this.animal_attributes = _.remove(this.animal_attributes, (attribute: any) => {
+			return attributeToDelete.id != attribute.id;
+		});
+	}
+
+	onEditAttribute() {}
 }

@@ -31,7 +31,7 @@ export class TypeDeviceComponent implements OnInit {
         });
     }
     open(content, item) {
-        this.modelRef = this.modalService.open(content);
+        this.modelRef = this.modalService.open(content,{ windowClass: 'confirm-delete-modal', centered: true });
         this.currentItem = item;
     }
     confirm(key) {

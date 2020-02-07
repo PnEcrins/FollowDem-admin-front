@@ -10,11 +10,11 @@ const routes: Routes = [
         component: AnimalsComponent
     },
     {
-        path: 'animal-view',
+        path: 'animal-view/:id',
         component: AnimalViewComponent
     },
     {
-        path: 'animal-form',
+        path: 'animal-form/:id',
         component: AnimalFormComponent
     },
     {

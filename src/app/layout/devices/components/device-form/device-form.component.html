@@ -4,14 +4,17 @@
             <div class="form-group">
                 <label class="with-required">{{'reference'|translate}}</label>
                 <div class="input-group">
-                    <input class="form-control" formControlName="reference">
+                    <input FeedBack class="form-control" formControlName="reference">
                 </div>
+                <app-form-error controlName="reference" errorKey="required"></app-form-error>
             </div>
             <div class="form-group">
-                <label  class="with-required">{{'type-device'|translate}}</label>
-                <select class="form-control" formControlName="device_type_id" id="exampleFormControlSelect1">
-                    <option *ngFor="let device_type of device_types" [value]="device_type.id">{{device_type.name}}</option>
+                <label class="with-required">{{'device_type'|translate}}</label>
+                <select FeedBack class="form-control" formControlName="device_type_id" id="exampleFormControlSelect1">
+                    <option *ngFor="let device_type of device_types" [value]="device_type.id">{{device_type.name}}
+                    </option>
                 </select>
+                <app-form-error controlName="device_type_id" errorKey="required"></app-form-error>
             </div>
             <div class="form-group">
                 <label>{{'comment'|translate}}</label>
@@ -19,9 +22,9 @@
                     <textarea class="form-control" formControlName="comment"></textarea>
                 </div>
             </div>
-            <button type="submit" (click)="save()" class="btn btn-primary"> Envoyer </button>
-            <button type="reset" (click)="router.navigate(['/devices'])" class="btn btn-light"> {{'cancel'|translate}}</button>
-
+            <button type="submit" (click)="save()" class="btn btn-primary mr-3"> {{'send'|translate}}</button>
+            <button type="reset" (click)="router.navigate(['/devices'])"
+                class="btn btn-secondary">{{'cancel'|translate}}</button>
         </form>
     </div>
 </div>

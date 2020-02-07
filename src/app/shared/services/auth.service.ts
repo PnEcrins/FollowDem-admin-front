@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { ToastrService, ToastrConfig } from 'ngx-toastr';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import { config } from '../../settings';
 import { CookieService } from 'ngx-cookie-service';
+
 export interface User {
     user_login: string;
     id_role: string;
@@ -18,7 +18,6 @@ export class AuthService {
     authentified = false;
     currentUser: any;
     token: string;
-    toastrConfig: ToastrConfig;
     loginError: boolean;
     public isLoading = false;
     constructor(private router: Router, private _http: HttpClient, private _cookie: CookieService) {}

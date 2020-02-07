@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {DeviceService} from './devices.service';
-import {TranslateService} from '@ngx-translate/core';
 import {routerTransition} from '../../router.animations';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,26 +16,25 @@ export class DevicesComponent implements OnInit {
   currentItem;
   modelRef;
   constructor(private deviceService: DeviceService,
-              private translate: TranslateService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal
+              ) { }
 
   ngOnInit() {
       this.setDevices();
   }
     setDevices(key = '') {
         this.deviceService.get(key).then(data => {
-           const keys = ['id', 'reference', 'comment']
+            const keys = ['reference', 'type', 'comment']
             this.cols = keys;
             this.devices = data;
         });
     }
     open(content, item) {
-        this.modelRef = this.modalService.open(content);
+        this.modelRef = this.modalService.open(content,{ windowClass: 'confirm-delete-modal', centered: true });
         this.currentItem = item;
     }
     confirm(key){
         this.deviceService.delete(this.currentItem).then(data => {
-            console.log(data);
             this.setDevices();
             this.modelRef.close();
         });

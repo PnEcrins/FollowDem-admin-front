@@ -1,9 +1,8 @@
 import { Injectable, Injector } from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse} from '@angular/common/http';
-import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import {Observable} from 'rxjs/index';
-import { tap, map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 @Injectable()
 export class MyCustomInterceptor implements HttpInterceptor {

@@ -1,95 +1,52 @@
-<h1>Vue Animal</h1>
-<div class="media">
-    <div class="media-body">
-        <h5 class="mt-0 mb-1">{{ 'name'| translate }}</h5>
-            {{animal.name}}
-    </div>
-    <div class="media-body">
-        <h5 class="mt-0 mb-1">{{ 'birth_year'| translate }}</h5>
-        {{animal.birth_year}}
-    </div>
-    <div class="media-body">
-        <h5 class="mt-0 mb-1">{{ 'capture_date'| translate }}</h5>
-        {{animal.capture_date}}
-    </div>
-    <div class="media-body">
-        <h5 class="mt-0 mb-1">{{ 'death_date'| translate }}</h5>
-        {{animal.death_date}}
-    </div>
-    <div class="media-body">
-        <h5 class="mt-0 mb-1">{{ 'comment'| translate }}</h5>
-        {{animal.comment}}
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <h1>Attribues</h1>
-        <button type="button" (click)="add_attribute?add_attribute=false:add_attribute=true" class="btn btn-success">{{'add_attribute' | translate}}</button>
-        <app-animal-attribute-form *ngIf="add_attribute" [animal]="animal" [animal_attribute]="current_animal_attribute" (changed)="get_output($event)"></app-animal-attribute-form>
-        <div class="card-body table-responsive">
-            <table class="table">
-                <thead class="thead-inverse">
-                <tr>
-                    <th *ngFor="let key of attribute_cols">{{key | translate}}</th>
-                    <th>**</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of animal.animal_attributes">
-                    <td *ngFor="let key of attribute_cols">
-                        {{ item[key].name?item[key].name:item[key] }}
-                    </td>
-                    <td>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a href="javascript:void()" (click)="open(content, item, null)"><i class="fa fa-remove"></i></a></li>
-                            <li class="list-inline-item"><a href="javascript:void()" (click)="edit(item, null)"><i class="fa fa-edit"></i> </a></li>
-                        </ul>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<div>
+    <h4>{{'animal_info'|translate}}</h4>
+    <hr>
+    <div class="row pb-3">
+        <div class="col-md-12 px-4">
+            <form [formGroup]="animalForm">
+                <div class="form-group">
+                    <label >{{'name'|translate}}</label>
+                    <div class="input-group">
+                        <input  class="form-control" formControlName="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label >{{'birth_year'|translate}}</label>
+                    <div class="input-group">
+                        <input  class="form-control" formControlName="birth_year">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label >{{'capture_date'|translate}}</label>
+                            <div class="input-group">
+                                <input  class="form-control" formControlName="capture_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>{{'death_date'|translate}}</label>
+                            <div class="input-group">
+                                <input  class="form-control" formControlName="death_date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{'comment'|translate}}</label>
+                    <div class="input-group">
+                        <textarea class="form-control" rows="3" formControlName="comment"></textarea>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <div class="col">
-        <h1>Devices</h1>
-        <button type="button" (click)="add_device?add_device=false:add_device=true" class="btn btn-success">{{'add_device' | translate}}</button>
-        <app-animal-device-form *ngIf="add_device" [animal]="animal" [animal_device]="current_animal_device"  (changed)="get_output($event)"></app-animal-device-form>
-        <div class="card-body table-responsive">
-            <table class="table">
-                <thead class="thead-inverse">
-                <tr>
-                    <th *ngFor="let key of device_cols">{{key | translate}}</th>
-                    <th>**</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of animal.animal_devices">
-                    <td *ngFor="let key of device_cols">
-                        {{ item[key].reference?item[key].reference:item[key] }}
-                    </td>
-                    <td>
-                        <ul class="list-inline">
-                            <li class="list-inline-item"><a href="javascript:void()" (click)="open(content,null , item)"><i class="fa fa-remove"></i></a></li>
-                            <li class="list-inline-item"><a href="javascript:void()" (click)="edit(null, item)"><i class="fa fa-edit"></i> </a></li>
-                        </ul>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <h4>{{'Devices'| translate}}</h4>
+    <hr>
+    <app-animal-device-form [editMode]="false" [animal_devices]="animal_devices"></app-animal-device-form>
+    <h4>Attribues</h4>
+    <hr>
+    <app-animal-attribute-form [editMode]="false"></app-animal-attribute-form>
 </div>
-<ng-template #content let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Notification!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Voulez-vous confirmer la suppression</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="confirm('Save click')">Confirmer</button>
-    </div>
-</ng-template>

@@ -2,49 +2,62 @@
     <div class="row">
         <div class="col">
             <ul class="list-inline">
-                <li class="list-inline-item"><a routerLink="/devices/device-form" class="btn btn-success">{{'add-device' | translate}}</a></li>
-                <li class="list-inline-item"><input type="text" class="form-control" placeholder="rechercher  par référence" #box (keyup.enter)="setDevices(box.value)" /></li>
+                <li class="list-inline-item"><a routerLink="/devices/device-form"
+                        class="btn btn-success">{{'add_device' | translate}}</a></li>
             </ul>
         </div>
     </div>
     <div class="row text-center">
         <div class="col-md-12">
-            <div class="card-header">{{'list-devices' | translate}}</div>
-            <div class="card-body table-responsive">
+            <div class="card-header">{{'list_devices' | translate}}</div>
+            <div class="input-group input-group-sm search-group">
+                <input type="search" class="form-control form-control-sm input-search"
+                    placeholder="{{'search_device' | translate}}" #box (keyup.enter)="setDevices(box.value)" />
+                <button (click)="setDevices(box.value)" class="btn btn-success btn-sm mx-2">
+                    {{'search'|translate}}</button>
+                <button *ngIf="box.value" type="reset" (click)="setDevices('');box.value =''"
+                    class="btn btn-secondary btn-sm">
+                    {{'cancel'|translate}}</button>
+            </div>
+            <div class="card-body table-responsive ">
                 <table class="table">
                     <thead class="thead-inverse">
-                    <tr>
-                        <th *ngFor="let key of cols">{{key | translate}}</th>
-                        <th>**</th>
-                    </tr>
+                        <tr>
+                            <th *ngFor="let key of cols">{{key | translate}}</th>
+                            <th>**</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of devices">
-                        <td *ngFor="let key of cols">{{item[key]}}</td>
-                        <td>
-                            <ul class="list-inline">
-                                <li class="list-inline-item"><a href="javascript:void()" [routerLink]="['/devices/device-form', {id: item['id']}]"><i class="fa fa-edit"></i> </a></li>
-                                <li class="list-inline-item"><a href="javascript:void()" (click)="open(content, item)"><i class="fa fa-remove"></i></a></li>
-                                <!--<li class="list-inline-item"><a href="javascript:void()" (click)="vew(item)"><i class="fa fa-eye"></i></a></li>-->
-                            </ul>
-                        </td>
-                    </tr>
+                        <tr *ngFor="let item of devices">
+                            <td *ngFor="let key of cols">{{item[key]}}</td>
+                            <td>
+                                <div>
+                                    <button class="btn btn-secondary btn-sm mr-2" placement="top"
+                                        ngbTooltip="{{'edit' | translate}}"
+                                        [routerLink]="['/devices/device-form', {id: item['id']}]">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-sm" ngbTooltip="{{'delete' | translate }}"
+                                        (click)="open(content, item)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-</div>
+    </div>
     <ng-template #content let-c="close" let-d="dismiss">
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Notification!</h4>
-            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal-header">   
+            <h5 class="modal-title"><i class="fa fa-trash"></i></h5>
         </div>
         <div class="modal-body">
-            <p>Voulez-vous confirmer la suppression</p>
+            {{'confirm_delete_device'| translate}}
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" (click)="confirm('Save click')">Confirmer</button>
+            <button type="button" class="cancel-btn" style="margin-right: 10px" (click)="d('Cross click')">{{'cancel' | translate}}</button>
+            <button type="button" class="green-btn"  (click)="confirm('Save click')">{{'delete' | translate}}</button>
         </div>
     </ng-template>
