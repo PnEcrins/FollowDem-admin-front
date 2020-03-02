@@ -153,8 +153,14 @@ export class AnimalFormComponent implements OnInit {
 					this.router.navigate([ '/animals' ]);
 				},
 				(error) => {
-					console.log(error);
-					this.toastr.error('Attention!', 'Merci de remplir les champs correctement!');
+						window.scroll(0, 0);
+						let errors = error.error.error.errors;
+						if (errors.find((err) => err.name == 'attribute_already_exists')) {
+							console.log('in');
+							
+							this.animalForm.controls['name'].setErrors({ animal_already_exists: true });
+						}
+						else this.toastr.error('server_error');
 				}
 			);
 		} else {
