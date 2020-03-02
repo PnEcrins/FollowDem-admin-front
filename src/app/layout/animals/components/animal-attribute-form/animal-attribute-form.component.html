@@ -1,10 +1,10 @@
 <div class="row  pb-3">
-    <div *ngIf="!showAttributeForm && editMode" class="col-md-12">
+    <div *ngIf="!showAttributeForm && !viewMode" class="col-md-12">
         <button type="button" (click)="onAddAttribute()"
             class="btn btn-success">{{'add_attribute' | translate}}</button>
     </div>
-    <div *ngIf="showAttributeForm" class="col-md-12 px-4">
-        <form class="add-form" [formGroup]="attributeForm">
+    <div *ngIf="showAttributeForm && attributes" class="col-md-12 px-4">
+        <form class="add-form"  [formGroup]="attributeForm">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -29,24 +29,24 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" (click)="onSaveAttribute(attributeForm.value)" class="btn btn-primary mr-3">
-                {{'add' | translate}} </button>
-            <button type="reset" (click)="onCancelAttribute()" class="btn btn-secondary">
+            <button type="button" (click)="onSaveAttribute(attributeForm.value)" class="btn btn-primary mr-3">
+                {{'save' | translate}} </button>
+            <button type="button" (click)="onCancelAttribute()" class="btn btn-secondary ">
                 {{'cancel'|translate}}</button>
         </form>
 
     </div>
     <div *ngIf="addAttributeError" class="col-md-12">
         <ngb-alert type="danger" class="mt-3 mx-2" *ngIf="!closedAlertAttribute" (close)="closedAlertAttribute=true">
-            {{'device_already_add' | translate}}</ngb-alert>
+            {{'attribute_already_add' | translate}}</ngb-alert>
     </div>
 
-    <div class="card-body table-responsive">
+    <div class="card-body py-2 table-responsive">
         <table  class="table">
-            <thead class="thead-inverse">
+            <thead  class="thead-light">
                 <tr>
                     <th *ngFor="let key of attribute_cols">{{key | translate}}</th>
-                    <th></th>
+                    <th>**</th>
                 </tr>
             </thead>
             <tbody *ngIf="animal_attributes && animal_attributes.length > 0">
@@ -55,12 +55,12 @@
                         {{ item[key] }}
                     </td>
                     <td>
-                        <ul *ngIf="editMode" class="list-inline">
-                            <button class="btn btn-secondary mr-3" placement="top" ngbTooltip="{{'edit' | translate}}"
+                        <ul *ngIf="!viewMode" class="list-inline">
+                            <button type="button" class="btn btn-secondary  btn-sm mr-2" placement="top" ngbTooltip="{{'edit' | translate}}"
                             (click)="onEditAttribute(item)">
                             <i class="fa fa-edit"></i>
                         </button>
-                        <button  class="btn btn-danger"  ngbTooltip="{{'delete' | translate}}" (click)="onDeleteAttribute(item)">
+                        <button type="button" class="btn btn-danger  btn-sm"  ngbTooltip="{{'delete' | translate}}" (click)="onDeleteAttribute(item)">
                             <i class="fa fa-trash"></i>
                         </button>
                         </ul>

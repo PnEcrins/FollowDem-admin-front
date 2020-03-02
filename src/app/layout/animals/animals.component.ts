@@ -4,6 +4,7 @@ import { AnimalsService } from './animals.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-animals',
@@ -26,12 +27,12 @@ export class AnimalsComponent implements OnInit {
 	}
 
 	open(content, item) {
-		this.modelRef = this.modalService.open(content);
+		this.modelRef = this.modalService.open(content, { windowClass: 'confirm-delete-modal', centered: true });
 		this.currentItem = item;
 	}
+	
 	confirm(key) {
 		this.animalService.delete(this.currentItem).then((data) => {
-			console.log(data);
 			this.setAnimals();
 			this.modelRef.close();
 		});
@@ -45,6 +46,11 @@ export class AnimalsComponent implements OnInit {
 				const keys = [ 'name', 'birth_year', 'capture_date', 'death_date' ];
 				this.cols = keys;
 				this.animals = data;
+				this.animals.forEach((animal) => {
+					if (animal.capture_date) animal.capture_date = moment(animal.capture_date).format('DD/MM/YYYY');
+					if (animal.death_date) animal.death_date = moment(animal.death_date).format('DD/MM/YYYY');
+				});
+
 				this.spinner.hide();
 			},
 			(error) => {
@@ -55,6 +61,6 @@ export class AnimalsComponent implements OnInit {
 	}
 
 	onAnimalView(id): void {
-		this.router.navigate(["/animals/animal-form/" + id], { state: { viewMode : true} });
+		this.router.navigate([ '/animals/animal-form/' + id ], { state: { viewMode: true } });
 	}
 }

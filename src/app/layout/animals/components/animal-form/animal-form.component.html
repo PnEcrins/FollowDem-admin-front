@@ -9,19 +9,22 @@
                     <div class="input-group">
                         <input FeedBack class="form-control" formControlName="name">
                     </div>
+                    <app-form-error controlName="name" errorKey="required"></app-form-error>
                 </div>
                 <div class="form-group">
                     <label class="with-required">{{'birth_year'|translate}}</label>
                     <div class="input-group">
-                        <input FeedBack class="form-control" formControlName="birth_year">
+                        <input FeedBack type="number" class="form-control" formControlName="birth_year">
                     </div>
+                    <app-form-error controlName="birth_year" errorKey="required"></app-form-error>
+                    <app-form-error controlName="birth_year" errorKey="pattern"></app-form-error>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="with-required">{{'capture_date'|translate}}</label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" formControlName="capture_date"
+                                <input FeedBack class="form-control" placeholder="dd/mm/yyyy" formControlName="capture_date"
                                     ngbDatepicker #capture_date="ngbDatepicker" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" 
@@ -29,13 +32,14 @@
                                         <i class="fa fa-calendar" aria-hidden="true"></i></button>
                                 </div>
                             </div>
+                            <app-form-error controlName="capture_date" errorKey="required"></app-form-error>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>{{'death_date'|translate}}</label>
                             <div class="input-group">
-                                <input FeedBack class="form-control" placeholder="yyyy-mm-dd"
+                                <input class="form-control" placeholder="dd/mm/yyyy"
                                     formControlName="death_date" ngbDatepicker #death_date="ngbDatepicker"
                                     [minDate]="startDate">
                                 <div class="input-group-append">
@@ -47,24 +51,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group pb-3">
                     <label>{{'comment'|translate}}</label>
                     <div class="input-group">
                         <textarea class="form-control" rows="3" formControlName="comment"></textarea>
                     </div>
                 </div>
+                <h4># {{'Devices'| translate}}</h4>
+                <hr>
+                <app-animal-device-form [viewMode]="false" [animal_devices]="animal_devices"  (added_device)="onAddDevice($event)"></app-animal-device-form>
+                <h4># {{'attributes'| translate}}</h4>
+                <hr>
+                <app-animal-attribute-form [viewMode]="false" [animal_attributes]="animal_attributes" (added_attributes)="onAddAttributes($event)"></app-animal-attribute-form>
+                <div  class="pr-3 d-flex justify-content-end">
+                    <button type="submit" (click)="onSave(animalForm.value)" class="btn btn-success mr-3">{{'save'|translate}}</button>
+                    <button type="reset" (click)="router.navigate(['/animals'])" class="btn btn-secondary">
+                        {{'cancel'|translate}}</button>
+                </div>
             </form>
         </div>
     </div>
-    <h4>{{'Devices'| translate}}</h4>
-    <hr>
-    <app-animal-device-form [editMode]="true" [animal_devices]="animal_devices"></app-animal-device-form>
-    <h4>Attribues</h4>
-    <hr>
-    <app-animal-attribute-form [editMode]="true"></app-animal-attribute-form>
-    <div  class="pr-3 d-flex justify-content-end">
-        <button type="submit" (click)="onSave()" class="btn btn-primary mr-3">{{'save'|translate}}</button>
-        <button type="reset" (click)="router.navigate(['/animals'])" class="btn btn-secondary">
-            {{'cancel'|translate}}</button>
-    </div>
+ 
 </div>

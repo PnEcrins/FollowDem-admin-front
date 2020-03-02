@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AnimalsService } from '../../animals.service';
-import { DeviceService } from '../../../devices/devices.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-animal-view',
@@ -17,7 +15,7 @@ export class AnimalViewComponent implements OnInit {
 	id;
 	animal;
 	device_cols = [ 'id', 'device', 'start_at', 'end_at', 'comment' ];
-	attribute_cols = [ 'id', 'attribute', 'value' ];
+	attribute_cols = [ 'id', 'attribute_name', 'value' ];
 	animal_devices: any;
 	animal_attributes: any;
 
@@ -36,11 +34,23 @@ export class AnimalViewComponent implements OnInit {
 		if (this.id) {
 			this.animalsService.get_by_id(this.id).then(
 				(animal) => {
-					console.log('animmal', animal);
 					this.animal = animal;
+					this.animal.capture_date = moment(this.animal.capture_date).format('DD/MM/YYYY');
+					if (this.animal.death_date)
+					this.animal.death_date = moment(this.animal.death_date).format('DD/MM/YYYY');
 					this.animal_devices = animal.animal_devices;
-                    this.animal_attributes = animal.animal_attributes;
-                    this.animalForm.patchValue(this.animal);
+					this.animal_attributes = animal.animal_attributes;
+					this.animal_devices.forEach((item) => {
+						item.reference = item.device.reference;
+						item.start_at = moment(item.start_at).format('DD/MM/YYYY');
+						if (item.end_at) item.end_at = moment(item.end_at).format('DD/MM/YYYY');
+					});
+
+					this.animal_attributes.forEach((item) => {
+						item.attribute_name = item.attribute.name;
+						item.id = item.attribute.id;
+					});
+					this.animalForm.patchValue(this.animal);
 				},
 				(error) => {
 					console.log(error);

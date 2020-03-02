@@ -57,6 +57,8 @@ export class AttributeFormComponent implements OnInit {
 	save() {
 		if (this.attributeForm.valid) {
 			const formData = this.attributeForm.getRawValue();
+			formData.name.toLowerCase();
+			formData.name = formData.name.trim();
 			if (this.attribute) formData.id = this.attribute.id;
 			const srvMethod: Promise<any> = !this.attribute
 				? this.attributesService.post(formData)
@@ -66,8 +68,10 @@ export class AttributeFormComponent implements OnInit {
 					this.router.navigate([ '/attributes' ]);
 				},
 				(error) => {
-					console.log(error);
-					this.toastr.error('Attention!', 'Merci de remplir les champs correctement!');
+					let errors = error.error.error.errors;
+					if (errors.find((err) => err.name == 'attribute_already_exists')) {
+						this.attributeForm.controls['name'].setErrors({ attirbute_already_exists: true });
+					} else this.toastr.error('server_error');
 				}
 			);
 		}

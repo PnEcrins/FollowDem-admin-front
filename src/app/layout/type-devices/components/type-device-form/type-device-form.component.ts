@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TypeDeviceService } from '../../type-devices.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-type-device-form',
@@ -18,6 +19,7 @@ export class TypeDeviceFormComponent implements OnInit {
 		public router: Router,
 		private typeDeviceService: TypeDeviceService,
 		private route: ActivatedRoute,
+		private toastr: ToastrService
 	) {}
 
 	ngOnInit() {
@@ -46,6 +48,8 @@ export class TypeDeviceFormComponent implements OnInit {
 	save() {
 		if (this.typeDeviceForm.valid) {
 			const formData = this.typeDeviceForm.getRawValue();
+			formData.name.toLowerCase();
+			formData.name = formData.name.trim();
 			if (this.type_device) formData.id = this.type_device.id;
 			const srvMethod: Promise<any> = !this.type_device
 				? this.typeDeviceService.post(formData)
@@ -55,7 +59,12 @@ export class TypeDeviceFormComponent implements OnInit {
 					this.router.navigate([ '/type-devices' ]);
 				},
 				(error) => {
-					console.log(error);
+					let errors = error.error.error.errors
+					if (errors.find((err) => err.name =="attribute_already_exists"))
+						{	this.typeDeviceForm.controls['name'].setErrors({'type_already_exists': true});
+					}
+					else
+					this.toastr.error('server_error');
 				}
 			);
 		}

@@ -9,6 +9,7 @@
 	"death_date": "Death date",
 	"id": "Identifiant",
 	"name": "Name",
+	"type" : "Type",
 	"comment": "Comment",
 	"list_animals": "Animals list",
 	"add_animal": "Add an animal",
@@ -22,6 +23,7 @@
 	"list_attributes": "Attributes list",
 	"attributes": "Attributes",
 	"attribute": "Attribute",
+	"attribute_name": "Attribute",
 	"attribute_type": "Attribute type",
 	"value_list": "Values list",
 	"order": "Order",
@@ -37,6 +39,7 @@
 	"add": "Add",
 	"save": "Save",
 	"device_already_add": "This device is already added",
+	"attribute_already_add" :"This attribute is already added",
 	"edit": "Edit",
 	"delete": "Delete",
 	"search": "Search",
@@ -46,6 +49,7 @@
 	"confirm_delete_type": "Are you sure you want to delete this device type",
 	"confirm_delete_attribute": "Are you sure you want to delete this attribute",
 	"confirm_delete_device": "Are you sure you want to delete this device",
+	"confirm_delete_animal": "Are you sure you want to delete this animal",
 	"seprated_list_msg": "must be separated by a semicolon",
 	"view": "view"
 

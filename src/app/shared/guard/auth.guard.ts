@@ -1,33 +1,32 @@
-import {
-    CanActivate,
-    CanActivateChild,
-    ActivatedRouteSnapshot,
-    RouterStateSnapshot
-} from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, CanLoad, CanActivate, CanActivateChild } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanActivateChild {
-    constructor(private _authService: AuthService, private _router: Router) {}
+export class AuthGuard implements CanLoad, CanActivate, CanActivateChild {
+	constructor(public auth: AuthService, public router: Router) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this._authService.getToken() === null) {
-            this._router.navigate(['/login']);
-            console.log('sss');
-            return false;
-        } else {
-            return true;
-        }
-    }
+	canLoad(): boolean {
+		if (!this.auth.isAuthenticated()) {
+			this.router.navigate([ 'login' ]);
+			return false;
+		}
+		return true;
+	}
 
-    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (this._authService.getToken() === null) {
-            this._router.navigate(['/login']);
-            return false;
-        } else {
-            return true;
-        }
-    }
+	canActivate(): boolean {
+		if (!this.auth.isAuthenticated()) {
+			this.router.navigate([ 'login' ]);
+			return false;
+		}
+		return true;
+	}
+
+	canActivateChild(): boolean {
+		if (!this.auth.isAuthenticated()) {
+			this.router.navigate([ 'login' ]);
+			return false;
+		}
+		return true;
+	}
 }

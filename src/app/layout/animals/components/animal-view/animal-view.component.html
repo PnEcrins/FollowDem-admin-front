@@ -5,23 +5,23 @@
         <div class="col-md-12 px-4">
             <form [formGroup]="animalForm">
                 <div class="form-group">
-                    <label >{{'name'|translate}}</label>
+                    <label>{{'name'|translate}}</label>
                     <div class="input-group">
-                        <input  class="form-control" formControlName="name">
+                        <input class="form-control" formControlName="name">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label >{{'birth_year'|translate}}</label>
+                    <label>{{'birth_year'|translate}}</label>
                     <div class="input-group">
-                        <input  class="form-control" formControlName="birth_year">
+                        <input class="form-control" formControlName="birth_year">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label >{{'capture_date'|translate}}</label>
+                            <label>{{'capture_date'|translate}}</label>
                             <div class="input-group">
-                                <input  class="form-control" formControlName="capture_date">
+                                <input class="form-control" formControlName="capture_date">
                             </div>
                         </div>
                     </div>
@@ -29,12 +29,12 @@
                         <div class="form-group">
                             <label>{{'death_date'|translate}}</label>
                             <div class="input-group">
-                                <input  class="form-control" formControlName="death_date">
+                                <input class="form-control" formControlName="death_date">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group pb-3">
                     <label>{{'comment'|translate}}</label>
                     <div class="input-group">
                         <textarea class="form-control" rows="3" formControlName="comment"></textarea>
@@ -43,10 +43,10 @@
             </form>
         </div>
     </div>
-    <h4>{{'Devices'| translate}}</h4>
+    <h4># {{'Devices'| translate}}</h4>
     <hr>
-    <app-animal-device-form [editMode]="false" [animal_devices]="animal_devices"></app-animal-device-form>
-    <h4>Attribues</h4>
+    <app-animal-device-form [viewMode]="true" [animal_devices]="animal_devices"></app-animal-device-form>
+    <h4># {{'attributes'|translate}}</h4>
     <hr>
-    <app-animal-attribute-form [editMode]="false"></app-animal-attribute-form>
+    <app-animal-attribute-form [viewMode]="true" [animal_attributes]="animal_attributes"></app-animal-attribute-form>
 </div>

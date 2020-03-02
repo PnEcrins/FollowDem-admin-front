@@ -35,20 +35,40 @@ export class FormErrorComponent {
         return '* Champs requis';
       }
     }
-    if (this.controlName === 'lat') {
-      if (this.errorKey === 'lat') {
-        return 'Entrer une latitude valide';
+    if (this.controlName === 'name') {
+      if (this.errorKey === 'type_already_exists') {
+        return ' ce type de dispositif existe déja';
+      } else if (this.errorKey === 'required') {
+        return '* Champs requis';
+      }
+      if (this.errorKey === 'attirbute_already_exists') {
+        return ' cet attribut existe déja';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
     }
-    if (this.controlName === 'lng') {
-      if (this.errorKey === 'lng') {
-        return 'Entrer une longitude valide';
+    if (this.controlName === 'reference') {
+      if (this.errorKey === 'device_already_exists') {
+        return ' ce dispositif existe déja';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
     }
+    if (this.controlName === 'order') {
+      if (this.errorKey === 'order_already_exists') {
+        return ' cet ordre existe déja';
+      } else if (this.errorKey === 'required') {
+        return '* Champs requis';
+      }
+    }
+    if (this.controlName === 'birth_year') {
+      if (this.errorKey === 'pattern') {
+        return 'Invalide année';
+      } else if (this.errorKey === 'required') {
+        return '* Champs requis';
+      }
+    }
+    
     return '* Champs requis';
 
   }

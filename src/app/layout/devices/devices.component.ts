@@ -24,9 +24,13 @@ export class DevicesComponent implements OnInit {
   }
     setDevices(key = '') {
         this.deviceService.get(key).then(data => {
-            const keys = ['reference', 'type', 'comment']
+            const keys = ['reference', 'id', 'type', 'comment']
             this.cols = keys;
             this.devices = data;
+            console.log('device', data);
+            this.devices.forEach(device => {
+                device.type = device.device_type.name
+            });
         });
     }
     open(content, item) {

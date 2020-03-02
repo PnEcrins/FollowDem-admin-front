@@ -9,6 +9,7 @@
 	"death_date": "Date de mort",
 	"id": "Identifiant",
 	"name": "Nom",
+	"type" : "Type",
 	"comment": "Commentaire",
 	"list_animals": "Liste des animaux",
 	"add_animal": "Ajouter un animal",
@@ -23,6 +24,7 @@
 	"attributes": "Attributs",
 	"attribute": "Attribut",
 	"attribute_type": "Type d'attributs",
+	"attribute_name": "Attribut",
 	"value_list": "Liste des valeurs",
 	"order": "Ordre",
 	"end_at": "Date de fin",
@@ -37,6 +39,7 @@
 	"add": "Ajouter",
 	"save": "Enregistrer",
 	"device_already_add": "Ce dispositif a été déja ajouté",
+	"attribute_already_add" :"Cet attribut a été déja ajouté",
 	"edit": "Editer",
 	"delete": "Supprimer",
 	"search": "Rechercher",
@@ -46,6 +49,7 @@
 	"confirm_delete_type": "Êtes-vous sûr de vouloir supprimer ce type de dispositif",
 	"confirm_delete_attribute": "Êtes-vous sûr de vouloir supprimer cet attribut",
 	"confirm_delete_device": "Êtes-vous sûr de vouloir supprimer ce dispositif",
+	"confirm_delete_animal": "Êtes-vous sûr de vouloir supprimer cet animal",
 	"seprated_list_msg": "séparé par point-virgule",
 	"view": "voir"
 }
