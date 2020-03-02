@@ -71,6 +71,9 @@ export class AttributeFormComponent implements OnInit {
 					let errors = error.error.error.errors;
 					if (errors.find((err) => err.name == 'attribute_already_exists')) {
 						this.attributeForm.controls['name'].setErrors({ attirbute_already_exists: true });
+					}
+					if (errors.find((err) => err.name == 'order_already_exists')) {
+						this.attributeForm.controls['order'].setErrors({ order_already_exists: true });
 					} else this.toastr.error('server_error');
 				}
 			);
