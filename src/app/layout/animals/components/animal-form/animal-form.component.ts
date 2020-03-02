@@ -75,6 +75,7 @@ export class AnimalFormComponent implements OnInit {
 					this.animal_attributes = animal.animal_attributes;
 					this.animal_devices.forEach((item) => {
 						item.reference = item.device.reference;
+						item.device_id = item.device.id;
 						item.start_at = moment(item.start_at).format('DD/MM/YYYY');
 						if (item.end_at) item.end_at = moment(item.end_at).format('DD/MM/YYYY');
 					});
@@ -156,8 +157,6 @@ export class AnimalFormComponent implements OnInit {
 						window.scroll(0, 0);
 						let errors = error.error.error.errors;
 						if (errors.find((err) => err.name == 'attribute_already_exists')) {
-							console.log('in');
-							
 							this.animalForm.controls['name'].setErrors({ animal_already_exists: true });
 						}
 						else this.toastr.error('server_error');
