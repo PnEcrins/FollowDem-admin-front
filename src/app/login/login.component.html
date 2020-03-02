@@ -16,7 +16,6 @@
                 <a class="btn rounded-btn" [routerLink]="['/animals']" (click)="onLoggedin()"> Log in </a>
                 &nbsp;-->
                 <input type="submit" class="btn rounded-btn" value="Connexion" />
-                <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
                 <p *ngIf="_authService.loginError" class="alert alert-danger" role="alert" style="margin-top:5px;">
                     <strong> {{'LoginError' | translate }} </strong>
                 </p>
