@@ -31,7 +31,7 @@ export class DeviceService {
     }
     delete(item: any): Promise<any> {
         let body = new HttpParams();
-        body = body.append('id[]', item.id);
+        body = body.append('id[]', item.id_device);
         return this.http.delete<any>(config.serverURL + '/api/devices', {params: body})
             .toPromise();
     }

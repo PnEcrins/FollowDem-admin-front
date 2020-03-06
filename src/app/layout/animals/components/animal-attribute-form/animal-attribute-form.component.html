@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label class="with-required">{{'attribute'|translate}}</label>
                         <select FeedBack class="form-control" formControlName="attributeSelect">
-                            <option *ngFor="let attribute of attributes" [ngValue]="attribute">{{attribute.name}}
+                            <option *ngFor="let attribute of attributes" [ngValue]="attribute">{{attribute.attribute}}
                             </option>
                         </select>
                         <app-form-error controlName="attributeSelect" errorKey="required"></app-form-error>

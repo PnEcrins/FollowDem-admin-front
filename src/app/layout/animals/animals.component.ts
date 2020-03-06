@@ -31,7 +31,7 @@ export class AnimalsComponent implements OnInit {
 		this.currentItem = item;
 	}
 	
-	confirm(key) {
+	confirm() {
 		this.animalService.delete(this.currentItem).then((data) => {
 			this.setAnimals();
 			this.modelRef.close();
@@ -62,5 +62,9 @@ export class AnimalsComponent implements OnInit {
 
 	onAnimalView(id): void {
 		this.router.navigate([ '/animals/animal-form/' + id ], { state: { viewMode: true } });
+	}
+
+	ngOnDestroy(): void {
+		if (this.modelRef) this.modelRef.close();
 	}
 }

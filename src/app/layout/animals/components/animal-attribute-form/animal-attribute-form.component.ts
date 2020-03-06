@@ -11,7 +11,7 @@ import { $ } from 'protractor';
 })
 export class AnimalAttributeFormComponent implements OnInit {
 	showAttributeForm = false;
-	attribute_cols = [ 'id', 'attribute_name', 'value' ];
+	attribute_cols = [ 'id_attribute', 'attribute_name', 'value' ];
 	addAttributeError: boolean = false;
 	closedAlertAttribute = false;
 	editAttribute: boolean = false; // is true on edit attribute mode
@@ -35,7 +35,7 @@ export class AnimalAttributeFormComponent implements OnInit {
 		this.attributeForm.controls['attributeSelect'].valueChanges.subscribe((val) => {
 			if (val) {
 				this.attributes.forEach((attribute) => {
-					if (attribute.id == val.id) this.attribute_values = attribute.value_list.split(';');
+					if (attribute.id_attribute == val.id_attribute) this.attribute_values = attribute.value_list.split(';');
 				});
 				this.attributeForm.controls['value'].enable();
 			}
@@ -43,7 +43,7 @@ export class AnimalAttributeFormComponent implements OnInit {
 
 		this.attributeService.get().then((attributes) => {
 			this.attributes = attributes;
-		});
+		});		
 	}
 
 	onAddAttribute() {
@@ -66,7 +66,7 @@ export class AnimalAttributeFormComponent implements OnInit {
 			if (this.editAttribute) {
 				// find and update attribue
 				let indexAttribute = this.animal_attributes.findIndex((attribue) => {
-					return attribue.device_id == this.attributeToEdit.device_id;
+					return attribue.id_attribute == this.attributeToEdit.id_attribute;
 				});
 				this.attributeToEdit.value = attributeOnSave.value;
 				this.animal_attributes[indexAttribute] = this.attributeToEdit;
@@ -79,10 +79,10 @@ export class AnimalAttributeFormComponent implements OnInit {
 				this.added_attributes.emit(this.animal_attributes);
 			} else {
 				// on add new attribute
-				attributeOnSave.id = attributeOnSave.attributeSelect.id;
-				attributeOnSave.attribute_name = attributeOnSave.attributeSelect.name;
+				attributeOnSave.id_attribute = attributeOnSave.attributeSelect.id_attribute;
+				attributeOnSave.attribute_name = attributeOnSave.attributeSelect.attribute;
 				let attrib_exist = this.animal_attributes.find((item) => {
-					return item.id == attributeOnSave.id;
+					return item.id_attribute == attributeOnSave.id_attribute;
 				});
 				// check if attribute is already added
 				if (attrib_exist) {
@@ -103,7 +103,7 @@ export class AnimalAttributeFormComponent implements OnInit {
 
 	onDeleteAttribute(attributeToDelete: any) {
 		this.animal_attributes = _.remove(this.animal_attributes, (attribute: any) => {
-			return attributeToDelete.id != attribute.id;
+			return attributeToDelete.id_attribute != attribute.id_attribute;
 		});
 		this.added_attributes.emit(this.animal_attributes);
 	}
@@ -112,8 +112,8 @@ export class AnimalAttributeFormComponent implements OnInit {
 		this.editAttribute = true;
 		this.attributeToEdit = attributeToEdit;
 		let att_index = this.attributes.findIndex((item) => {
-			if (attributeToEdit.attribute) return item.id == attributeToEdit.attribute.id;
-			if (attributeToEdit.attributeSelect) return item.id == attributeToEdit.attributeSelect.id;
+			if (attributeToEdit.attribute) return item.id_attribute == attributeToEdit.attribute.id_attribute;
+			if (attributeToEdit.attributeSelect) return item.id_attribute == attributeToEdit.attributeSelect.id_attribute;
 		});
 		this.attributeForm.patchValue({
 			attributeSelect: this.attributes[att_index],

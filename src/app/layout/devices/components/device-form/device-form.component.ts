@@ -24,13 +24,12 @@ export class DeviceFormComponent implements OnInit {
 
 	ngOnInit() {
 		this.deviceForm = new FormGroup({
-			reference: new FormControl('', Validators.required),
-			device_type_id: new FormControl('', Validators.required),
-			comment: new FormControl('')
+			ref_device: new FormControl(null, Validators.required),
+			device_type: new FormControl(null, Validators.required),
+			comment: new FormControl(null)
 		});
 		this.deviceService.get_device_types().then((data) => {
 			this.device_types = data;
-			console.log(data);
 		});
 		// Get current dive id from parms and set form
 		this.sub = this.route.params.subscribe((params) => {
@@ -51,12 +50,15 @@ export class DeviceFormComponent implements OnInit {
 			}
 		});
 	}
+
 	save() {
 		if (this.deviceForm.valid) {
 			const formData = this.deviceForm.getRawValue();
-			formData.reference.toLowerCase();
-			formData.reference = formData.reference.trim();
-			if (this.device) formData.id = this.device.id;
+			formData.ref_device.toLowerCase();
+			formData.ref_device = formData.ref_device.trim();
+			formData.id_device_type = formData.device_type.id_device_type;
+			delete formData.device_type;
+			if (this.device) formData.id_device = this.device.id_device;
 			const srvMethod: Promise<any> = !this.device
 				? this.deviceService.post(formData)
 				: this.deviceService.patch(formData);
@@ -67,16 +69,25 @@ export class DeviceFormComponent implements OnInit {
 				(error) => {
 					let errors = error.error.error.errors;
 					if (errors.find((err) => err.name == 'device_already_exists')) {
-						this.deviceForm.controls['reference'].setErrors({ device_already_exists: true });
+						this.deviceForm.controls['ref_device'].setErrors({ device_already_exists: true });
 					} else this.toastr.error('server_error');
 				}
 			);
 		}
 	}
+
 	reset() {
 		this.deviceForm.reset();
 	}
+	
 	setDeviceFrom() {
-		this.deviceForm.patchValue(this.device);
+		let indexDevice = this.device_types.findIndex((type) => {
+			return type.id_device_type == this.device.device_type.id_device_type;
+		});
+		this.deviceForm.patchValue({
+			ref_device:this.device.ref_device,
+			device_type: this.device_types[indexDevice],
+			comment: this.device.comment
+		})
 	}
 }

@@ -5,6 +5,7 @@ import { routerTransition } from '../../../../router.animations';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import _ from 'lodash';
 import { AnimalsService } from '../../animals.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'app-animal-device-form',
@@ -17,7 +18,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 	startDate: string;
 	devices: any[];
 	@Input() animal_devices: any[];
-	device_cols = [ 'reference', 'start_at', 'end_at', 'comment' ];
+	device_cols = [ 'ref_device', 'date_start', 'date_end', 'comment' ];
 	showDeviceForm: boolean = false;
 	closedAlertDevice: boolean = false;
 	alertMsg: string;
@@ -26,28 +27,31 @@ export class AnimalDeviceFormComponent implements OnInit {
 	@Output() added_device = new EventEmitter<any>();
 	editDevice: boolean = false;
 	deviceToEdit: any;
+	id_animal: number;
 
 	constructor(
 		private deviceService: DeviceService,
 		private animalsService: AnimalsService,
+		private route: ActivatedRoute,
 		private dateParser: NgbDateParserFormatter,
 		private fb: FormBuilder
 	) {}
 
 	ngOnInit() {
+		this.id_animal = this.route.snapshot.params['id'];
 		if (!this.animal_devices) this.animal_devices = [];
 		this.deviceForm = this.fb.group({
 			device: [ null, Validators.required ],
-			start_at: [ null, Validators.required ],
-			end_at: [ { value: null, disabled: true } ],
+			date_start: [ null, Validators.required ],
+			date_end: [ { value: null, disabled: true } ],
 			comment: [ null ]
 		});
 
-		this.deviceForm.controls['start_at'].statusChanges.subscribe(() => {
-			if (this.deviceForm.controls['start_at'].value) {
-				this.startDate = this.deviceForm.controls['start_at'].value;
-				this.deviceForm.controls['end_at'].clearValidators();
-				this.deviceForm.controls['end_at'].enable();
+		this.deviceForm.controls['date_start'].statusChanges.subscribe(() => {
+			if (this.deviceForm.controls['date_start'].value) {
+				this.startDate = this.deviceForm.controls['date_start'].value;
+				this.deviceForm.controls['date_end'].clearValidators();
+				this.deviceForm.controls['date_end'].enable();
 			}
 		});
 
@@ -62,51 +66,49 @@ export class AnimalDeviceFormComponent implements OnInit {
 
 	onSaveDevice(deviceOnSave) {
 		if (this.deviceForm.valid) {
-			this.animalsService.device_available(deviceOnSave.device.id).then(
-				(devId) => {
-					if (devId.length > 0)
-					{
+			// on Edit device
+			if (this.editDevice) {
+				// find and update device
+				let indexDevice = this.animal_devices.findIndex((device) => {
+					return device.id_device == this.deviceToEdit.id_device;
+				});
+				this.deviceToEdit.date_start = this.dateParser.format(deviceOnSave.date_start);
+				this.deviceToEdit.comment = deviceOnSave.comment;
+				if (deviceOnSave.date_end) {
+					this.deviceToEdit.date_end = this.dateParser.format(deviceOnSave.date_end);
+				} else {
+					this.deviceToEdit.date_end = null;
+				}
+				this.animal_devices[indexDevice] = this.deviceToEdit;
+				// reset attributre form and init value
+				this.deviceForm.reset();
+				this.editDevice = false;
+				this.showDeviceForm = false;
+				this.deviceForm.controls['device'].enable();
+				this.deviceForm.controls['date_end'].disable();
+				this.deviceToEdit = null;
+				this.added_device.emit(this.animal_devices); // event update animal_device
+			} else {
+				this.animalsService.device_available(deviceOnSave.device.id_device, this.id_animal).then((devId) => {
+					if (devId.length > 0) {
 						this.addDeviceError = true;
-						this.alertMsg = "device_used_by_another_animal";
+						this.alertMsg = 'device_used_by_another_animal';
 						this.closedAlertDevice = false;
-					}
-					else {
-						// on Edit device
-					if (this.editDevice) {
-						// find and update device
-						let indexDevice = this.animal_devices.findIndex((device) => {
-							return device.device_id == this.deviceToEdit.device_id;
-						});
-						this.deviceToEdit.start_at = this.dateParser.format(deviceOnSave.start_at);
-						this.deviceToEdit.comment = deviceOnSave.comment;
-						if (deviceOnSave.end_at) {
-							this.deviceToEdit.end_at = this.dateParser.format(deviceOnSave.end_at);
-						} else {
-							this.deviceToEdit.end_at = null;
-						}
-						this.animal_devices[indexDevice] = this.deviceToEdit;
-						// reset attributre form and init value
-						this.deviceForm.reset();
-						this.editDevice = false;
-						this.showDeviceForm = false;
-						this.deviceForm.controls['device'].enable();
-						this.deviceForm.controls['end_at'].disable();
-						this.deviceToEdit = null;
-						this.added_device.emit(this.animal_devices); // event update animal_device
 					} else {
 						// on add new device
-						deviceOnSave.reference = deviceOnSave.device.reference;
-						deviceOnSave.device_id = deviceOnSave.device.id;
-						deviceOnSave.start_at = this.dateParser.format(deviceOnSave.start_at);
-						if (deviceOnSave.end_at) deviceOnSave.end_at = this.dateParser.format(deviceOnSave.end_at);
+						deviceOnSave.ref_device = deviceOnSave.device.ref_device;
+						deviceOnSave.id_device = deviceOnSave.device.id_device;
+						deviceOnSave.date_start = this.dateParser.format(deviceOnSave.date_start);
+						if (deviceOnSave.date_end)
+							deviceOnSave.date_end = this.dateParser.format(deviceOnSave.date_end);
 						let device_exist = this.animal_devices.find((item) => {
-							return item.device_id == deviceOnSave.device_id;
+							return item.id_device == deviceOnSave.id_device;
 						});
-						
+
 						// check if device is already added
 						if (device_exist) {
 							this.addDeviceError = true;
-							this.alertMsg = "device_already_add";
+							this.alertMsg = 'device_already_add';
 							this.closedAlertDevice = false;
 						} else {
 							delete deviceOnSave.device;
@@ -115,15 +117,12 @@ export class AnimalDeviceFormComponent implements OnInit {
 							this.deviceForm.reset();
 							this.showDeviceForm = false;
 							this.closedAlertDevice = true;
-							this.deviceForm.controls['end_at'].disable();
+							this.deviceForm.controls['date_end'].disable();
 							this.added_device.emit(this.animal_devices); // event new animal_device
 						}
 					}
-					}
-					
-				},
-				(err) => console.log('err', err)
-			);
+				});
+			}
 		}
 	}
 
@@ -131,13 +130,12 @@ export class AnimalDeviceFormComponent implements OnInit {
 		this.editDevice = true;
 		this.deviceToEdit = deviceToEdit;
 		let indexDevice = this.devices.findIndex((device) => {
-			return device.id == deviceToEdit.device_id;
+			return device.id_device == deviceToEdit.id_device;
 		});
-
 		this.deviceForm.patchValue({
 			device: this.devices[indexDevice],
-			start_at: this.dateParser.parse(deviceToEdit.start_at),
-			end_at: this.dateParser.parse(deviceToEdit.end_at),
+			date_start: this.dateParser.parse(deviceToEdit.date_start),
+			date_end: this.dateParser.parse(deviceToEdit.date_end),
 			comment: deviceToEdit.comment
 		});
 		this.deviceForm.controls['device'].disable();
@@ -146,7 +144,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 
 	onDeleteDevice(deviceToDelete: any) {
 		this.animal_devices = _.remove(this.animal_devices, (device: any) => {
-			return deviceToDelete.reference != device.reference;
+			return deviceToDelete.ref_device != device.ref_device;
 		});
 		this.added_device.emit(this.animal_devices);
 	}
@@ -156,7 +154,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 		this.showDeviceForm = false;
 		this.closedAlertDevice = true;
 		this.editDevice = false;
-		this.deviceForm.controls['end_at'].disable();
+		this.deviceForm.controls['date_end'].disable();
 		this.deviceForm.controls['device'].enable();
 		this.deviceToEdit = null;
 	}

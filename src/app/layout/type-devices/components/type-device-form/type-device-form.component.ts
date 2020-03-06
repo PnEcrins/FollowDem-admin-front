@@ -24,7 +24,7 @@ export class TypeDeviceFormComponent implements OnInit {
 
 	ngOnInit() {
 		this.typeDeviceForm = new FormGroup({
-			name: new FormControl('')
+			device_type: new FormControl('')
 		});
 		// Get current dive id from parms and set form
 		this.sub = this.route.params.subscribe((params) => {
@@ -48,23 +48,21 @@ export class TypeDeviceFormComponent implements OnInit {
 	save() {
 		if (this.typeDeviceForm.valid) {
 			const formData = this.typeDeviceForm.getRawValue();
-			formData.name.toLowerCase();
-			formData.name = formData.name.trim();
-			if (this.type_device) formData.id = this.type_device.id;
+			formData.device_type.toLowerCase();
+			formData.device_type = formData.device_type.trim();
+			if (this.type_device) formData.id_device_type = this.type_device.id_device_type;
 			const srvMethod: Promise<any> = !this.type_device
 				? this.typeDeviceService.post(formData)
 				: this.typeDeviceService.patch(formData);
 			srvMethod.then(
-				(data) => {
+				() => {
 					this.router.navigate([ '/type-devices' ]);
 				},
 				(error) => {
-					let errors = error.error.error.errors
-					if (errors.find((err) => err.name =="attribute_already_exists"))
-						{	this.typeDeviceForm.controls['name'].setErrors({'type_already_exists': true});
-					}
-					else
-					this.toastr.error('server_error');
+					let errors = error.error.error.errors;
+					if (errors.find((err) => err.name == 'attribute_already_exists')) {
+						this.typeDeviceForm.controls['device_type'].setErrors({ type_already_exists: true });
+					} else this.toastr.error('server_error');
 				}
 			);
 		}

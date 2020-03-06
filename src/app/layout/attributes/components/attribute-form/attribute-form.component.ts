@@ -24,7 +24,7 @@ export class AttributeFormComponent implements OnInit {
 
 	ngOnInit() {
 		this.attributeForm = new FormGroup({
-			name: new FormControl('', Validators.required),
+			attribute: new FormControl('', Validators.required),
 			value_list: new FormControl('', Validators.required),
 			attribute_type: new FormControl('', Validators.required),
 			order: new FormControl('', Validators.required)
@@ -57,20 +57,20 @@ export class AttributeFormComponent implements OnInit {
 	save() {
 		if (this.attributeForm.valid) {
 			const formData = this.attributeForm.getRawValue();
-			formData.name.toLowerCase();
-			formData.name = formData.name.trim();
-			if (this.attribute) formData.id = this.attribute.id;
+			formData.attribute.toLowerCase();
+			formData.attribute = formData.attribute.trim();
+			if (this.attribute) formData.id_attribute = this.attribute.id_attribute;
 			const srvMethod: Promise<any> = !this.attribute
 				? this.attributesService.post(formData)
 				: this.attributesService.patch(formData);
 			srvMethod.then(
-				(data) => {
+				() => {
 					this.router.navigate([ '/attributes' ]);
 				},
 				(error) => {
 					let errors = error.error.error.errors;
 					if (errors.find((err) => err.name == 'attribute_already_exists')) {
-						this.attributeForm.controls['name'].setErrors({ attirbute_already_exists: true });
+						this.attributeForm.controls['attribute'].setErrors({ attirbute_already_exists: true });
 					}
 					if (errors.find((err) => err.name == 'order_already_exists')) {
 						this.attributeForm.controls['order'].setErrors({ order_already_exists: true });

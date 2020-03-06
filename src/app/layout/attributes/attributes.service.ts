@@ -22,7 +22,7 @@ export class AttributesService {
     }
     delete(item: any): Promise<any> {
         let body = new HttpParams();
-        body = body.append('id[]', item.id);
+        body = body.append('id[]', item.id_attribute);
         return this.http.delete<any>(config.serverURL + '/api/attributes', {params: body})
             .toPromise();
     }

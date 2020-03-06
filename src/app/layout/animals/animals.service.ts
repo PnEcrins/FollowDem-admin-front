@@ -44,11 +44,14 @@ export class AnimalsService {
 	}
 	delete(item: any): Promise<any> {
 		let body = new HttpParams();
-		body = body.append('id[]', item.id);
+		body = body.append('id[]', item.id_animal);
 		return this.http.delete<any>(config.serverURL + '/api/animals', { params: body }).toPromise();
     }
     
-	device_available(deviceId: number): Promise<any> {
-		return this.http.post<any>(config.serverURL + '/api/animals/device_available', deviceId).toPromise();
+	device_available(deviceId: number, animalId: number): Promise<any> {
+		let params = new HttpParams();
+		params = params.append('deviceId', deviceId.toString());
+		params = params.append('animalId', animalId.toString());
+		return this.http.get<any>(config.serverURL + '/api/animals/device_available',{ params: params }).toPromise();
 	}
 }

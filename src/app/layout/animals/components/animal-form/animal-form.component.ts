@@ -67,21 +67,21 @@ export class AnimalFormComponent implements OnInit {
 		if (this.id) {
 			this.animalsService.get_by_id(this.id).then(
 				(animal) => {
-					this.animal = animal;
+					this.animal = animal;				
 					this.animal.capture_date = moment(this.animal.capture_date).format('DD/MM/YYYY');
 					if (this.animal.death_date)
 						this.animal.death_date = moment(this.animal.death_date).format('DD/MM/YYYY');
 					this.animal_devices = animal.animal_devices;
 					this.animal_attributes = animal.animal_attributes;
 					this.animal_devices.forEach((item) => {
-						item.reference = item.device.reference;
-						item.device_id = item.device.id;
-						item.start_at = moment(item.start_at).format('DD/MM/YYYY');
-						if (item.end_at) item.end_at = moment(item.end_at).format('DD/MM/YYYY');
+						item.ref_device = item.device.ref_device;
+						item.id_device = item.device.id_device;
+						item.date_start = moment(item.date_start).format('DD/MM/YYYY');
+						if (item.date_end) item.date_end = moment(item.date_end).format('DD/MM/YYYY');
 					});
 					this.animal_attributes.forEach((item) => {
-						item.attribute_name = item.attribute.name;
-						item.id = item.attribute.id;
+						item.attribute_name = item.attribute.attribute;
+						item.id_attribute = item.attribute.id_attribute;
 					});
 					this.add_devices = _.cloneDeep(this.animal_devices);
 					this.add_attributes = _.cloneDeep(this.animal_attributes);
@@ -119,29 +119,30 @@ export class AnimalFormComponent implements OnInit {
 				formData.capture_date = this.dateParser.format(this.animalForm.controls['capture_date'].value);
 			if (formData.death_date)
 				formData.death_date = this.dateParser.format(this.animalForm.controls['death_date'].value);
-			if (this.animal) formData.id = this.animal.id;
+			if (this.animal) formData.id_animal = this.animal.id_animal;
 			dataToSend.animal = formData;
 			if (this.add_devices) {
 				this.add_devices.forEach((device) => {
 					if (device.device) {
-						device.device_id = device.device.id;
+						device.id_device = device.device.id_device;
 						delete device.device;
 					}
-					delete device.reference;
+					delete device.ref_device;
 				});
 			}
 			dataToSend.devices = this.add_devices;
 			if (this.add_attributes) {
 				this.add_attributes.forEach((attribute) => {
 					if (attribute.attributeSelect) {
-						attribute.attribute_id = attribute.attributeSelect.id;
+						attribute.id_attribute = attribute.attributeSelect.id_attribute;
 						delete attribute.attributeSelect;
 					}
 					if (attribute.attribute) {
-						attribute.attribute_id = attribute.attribute.id;
+						attribute.id_attribute = attribute.attribute.id_attribute;
 						delete attribute.attribute;
 					}
-					delete attribute.id;
+					
+					delete attribute.attribute;
 					delete attribute.attribute_name;
 				});
 			}

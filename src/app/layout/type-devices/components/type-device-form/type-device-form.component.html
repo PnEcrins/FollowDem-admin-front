@@ -2,12 +2,12 @@
     <div class="col">
         <form [formGroup]="typeDeviceForm">
             <div class="form-group">
-                <label class="with-required">{{'name'|translate}}</label>
+                <label class="with-required">{{'device_type'|translate}}</label>
                 <div class="input-group">
-                    <input FeedBack class="form-control" formControlName="name" required>
+                    <input FeedBack class="form-control" formControlName="device_type" required>
                 </div>
-                <app-form-error controlName="name" errorKey="required"></app-form-error>
-                <app-form-error controlName="name" errorKey="type_already_exists"></app-form-error>
+                <app-form-error controlName="device_type" errorKey="required"></app-form-error>
+                <app-form-error controlName="device_type" errorKey="type_already_exists"></app-form-error>
             </div>
             <button type="submit" (click)="save()" class="btn btn-primary mr-3">{{'send'|translate}} </button>
             <button type="reset" (click)="router.navigate(['/type-devices'])"

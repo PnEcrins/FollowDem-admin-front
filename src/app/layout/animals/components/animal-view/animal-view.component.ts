@@ -14,8 +14,8 @@ export class AnimalViewComponent implements OnInit {
 
 	id;
 	animal;
-	device_cols = [ 'id', 'device', 'start_at', 'end_at', 'comment' ];
-	attribute_cols = [ 'id', 'attribute_name', 'value' ];
+	device_cols = [ 'id_device', 'device', 'date_start', 'date_end', 'comment' ];
+	attribute_cols = [ 'id_attribute', 'attribute', 'value' ];
 	animal_devices: any;
 	animal_attributes: any;
 
@@ -41,14 +41,14 @@ export class AnimalViewComponent implements OnInit {
 					this.animal_devices = animal.animal_devices;
 					this.animal_attributes = animal.animal_attributes;
 					this.animal_devices.forEach((item) => {
-						item.reference = item.device.reference;
-						item.start_at = moment(item.start_at).format('DD/MM/YYYY');
-						if (item.end_at) item.end_at = moment(item.end_at).format('DD/MM/YYYY');
+						item.ref_device = item.device.ref_device;
+						item.date_start = moment(item.date_start).format('DD/MM/YYYY');
+						if (item.date_end) item.date_end = moment(item.date_end).format('DD/MM/YYYY');
 					});
 
 					this.animal_attributes.forEach((item) => {
-						item.attribute_name = item.attribute.name;
-						item.id = item.attribute.id;
+						item.attribute_name = item.attribute.attribute;
+						item.id_attribute = item.attribute.id_attribute;
 					});
 					this.animalForm.patchValue(this.animal);
 				},
