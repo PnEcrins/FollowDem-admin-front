@@ -29,6 +29,7 @@ export class AnimalFormComponent implements OnInit {
 	animal_attributes: any;
 	add_devices: any;
 	add_attributes: any;
+	startCaptureDate: any;
 
 	constructor(
 		private animalsService: AnimalsService,
@@ -54,9 +55,19 @@ export class AnimalFormComponent implements OnInit {
 			comment: [ null ]
 		});
 
+		this.animalForm.controls['birth_year'].valueChanges.subscribe((value) => {
+			if (this.animalForm.controls['birth_year'].value) {
+			this.startCaptureDate = {year: value, month: 1, day: 1} ;
+			this.animalForm.controls['capture_date'].reset();
+			this.animalForm.controls['death_date'].reset();
+			
+			}
+		});
+
 		this.animalForm.controls['capture_date'].statusChanges.subscribe(() => {
 			if (this.animalForm.controls['capture_date'].value) {
 				this.startDate = this.animalForm.controls['capture_date'].value;
+				this.animalForm.controls['death_date'].reset();
 				this.animalForm.controls['death_date'].clearValidators();
 				if (this.animalForm.enabled) this.animalForm.controls['death_date'].enable();
 			}

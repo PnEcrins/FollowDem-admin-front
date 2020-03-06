@@ -26,7 +26,7 @@
                             <label class="with-required">{{'capture_date'|translate}}</label>
                             <div class="input-group">
                                 <input FeedBack class="form-control" placeholder="dd/mm/yyyy" formControlName="capture_date"
-                                    ngbDatepicker #capture_date="ngbDatepicker" required>
+                                    ngbDatepicker #capture_date="ngbDatepicker"  [minDate]="startCaptureDate"required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" 
                                         (click)="capture_date.toggle()" type="button">

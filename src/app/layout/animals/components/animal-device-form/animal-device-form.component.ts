@@ -50,6 +50,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 		this.deviceForm.controls['date_start'].statusChanges.subscribe(() => {
 			if (this.deviceForm.controls['date_start'].value) {
 				this.startDate = this.deviceForm.controls['date_start'].value;
+				this.deviceForm.controls['date_end'].reset();
 				this.deviceForm.controls['date_end'].clearValidators();
 				this.deviceForm.controls['date_end'].enable();
 			}
