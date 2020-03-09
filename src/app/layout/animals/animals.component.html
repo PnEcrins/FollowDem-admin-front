@@ -12,7 +12,7 @@
             <div class="card-header">{{'list_animals' | translate}}</div>
             <div class="input-group input-group-sm search-group">
                 <input type="search" class="form-control form-control-sm input-search"
-                    placeholder="{{'search_animal'|translate}}" #box (keyup.enter)="setDevices(box.value)" />
+                    placeholder="{{'search_animal'|translate}}" #box (keyup.enter)="setAnimals(box.value)" />
                 <button (click)="setAnimals(box.value)" class="btn btn-success btn-sm mx-2">
                     {{'search'|translate}}</button>
                 <button *ngIf="box.value" type="reset" (click)="setAnimals('');box.value =''"

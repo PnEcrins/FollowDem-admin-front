@@ -74,7 +74,6 @@ export class AuthService {
                     this.loginError = false;
                     this.router.navigate(['']);
                     this.isLoading = false;
-                    console.log(this._cookie.get('token'));
                 },
                 error => {
                     this.loginError = true;
@@ -87,7 +86,6 @@ export class AuthService {
         this._http
             .post<any>(`${config.serverURL}/auth/logout`,{})
             .subscribe(data => {
-                    console.log(data);
                 }
             );
     }

@@ -65,8 +65,8 @@
                 <hr>
                 <app-animal-attribute-form [viewMode]="false" [animal_attributes]="animal_attributes" (added_attributes)="onAddAttributes($event)"></app-animal-attribute-form>
                 <div  class="pr-3 d-flex justify-content-end">
-                    <button type="submit" (click)="onSave(animalForm.value)" class="btn btn-success mr-3">{{'save'|translate}}</button>
-                    <button type="reset" (click)="router.navigate(['/animals'])" class="btn btn-secondary">
+                    <button type="submit" (click)="onSave()" class="btn btn-success mr-3">{{'save'|translate}}</button>
+                    <button type="reset" [routerLink]="['/animals']" class="btn btn-secondary">
                         {{'cancel'|translate}}</button>
                 </div>
             </form>

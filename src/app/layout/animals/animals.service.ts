@@ -48,10 +48,11 @@ export class AnimalsService {
 		return this.http.delete<any>(config.serverURL + '/api/animals', { params: body }).toPromise();
     }
     
-	device_available(deviceId: number, animalId: number): Promise<any> {
+	device_available(deviceId: number, animalId?: number): Promise<any> {
 		let params = new HttpParams();
-		params = params.append('deviceId', deviceId.toString());
+		if(animalId)
 		params = params.append('animalId', animalId.toString());
+		params = params.append('deviceId', deviceId.toString());
 		return this.http.get<any>(config.serverURL + '/api/animals/device_available',{ params: params }).toPromise();
 	}
 }
