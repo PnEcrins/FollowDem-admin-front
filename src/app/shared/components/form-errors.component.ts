@@ -41,6 +41,8 @@ export class FormErrorComponent {
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
+    }
+    if (this.controlName === 'name') {
       if (this.errorKey === 'animal_already_exists') {
         return ' cet animal existe déja';
       } else if (this.errorKey === 'required') {

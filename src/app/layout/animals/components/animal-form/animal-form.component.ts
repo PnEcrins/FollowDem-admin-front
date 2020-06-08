@@ -165,7 +165,7 @@ export class AnimalFormComponent implements OnInit {
 				() => {
 					this.router.navigate([ '/animals' ]);
 				},
-				(error) => {
+				(error) => {					
 						window.scroll(0, 0);
 						let errors = error.error.error.errors;
 						if (errors.find((err) => err.name == 'attribute_already_exists')) {
