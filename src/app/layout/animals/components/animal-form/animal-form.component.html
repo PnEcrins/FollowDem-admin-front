@@ -25,8 +25,8 @@
                         <div class="form-group">
                             <label class="with-required">{{'capture_date'|translate}}</label>
                             <div class="input-group">
-                                <input FeedBack class="form-control" placeholder="dd/mm/yyyy" formControlName="capture_date"
-                                    ngbDatepicker #capture_date="ngbDatepicker"  [minDate]="startCaptureDate"required>
+                                <input FeedBack class="form-control" [maxDate]="now" placeholder="dd/mm/yyyy" formControlName="capture_date"
+                                    ngbDatepicker #capture_date="ngbDatepicker"  [minDate]="startCaptureDate" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" 
                                         (click)="capture_date.toggle()" type="button">
@@ -42,7 +42,7 @@
                             <div class="input-group">
                                 <input class="form-control" placeholder="dd/mm/yyyy"
                                     formControlName="death_date" ngbDatepicker #death_date="ngbDatepicker"
-                                    [minDate]="startDate">
+                                    [minDate]="startDate" [maxDate]="now">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" 
                                         (click)="death_date.toggle()" type="button">

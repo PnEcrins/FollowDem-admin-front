@@ -30,6 +30,7 @@ export class AnimalFormComponent implements OnInit {
 	add_devices: any;
 	add_attributes: any;
 	startCaptureDate: any;
+	now: any;
 
 	constructor(
 		private animalsService: AnimalsService,
@@ -41,6 +42,7 @@ export class AnimalFormComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.now = this.dateParser.parse(moment().format('DD/MM/YYYY'));
 		this.animalForm = this.fb.group({
 			name: [ null, Validators.required ],
 			birth_year: [
@@ -57,10 +59,9 @@ export class AnimalFormComponent implements OnInit {
 
 		this.animalForm.controls['birth_year'].valueChanges.subscribe((value) => {
 			if (this.animalForm.controls['birth_year'].value) {
-			this.startCaptureDate = {year: value, month: 1, day: 1} ;
-			this.animalForm.controls['capture_date'].reset();
-			this.animalForm.controls['death_date'].reset();
-			
+				this.startCaptureDate = { year: value, month: 1, day: 1 };
+				this.animalForm.controls['capture_date'].reset();
+				this.animalForm.controls['death_date'].reset();
 			}
 		});
 
@@ -78,7 +79,7 @@ export class AnimalFormComponent implements OnInit {
 		if (this.id) {
 			this.animalsService.get_by_id(this.id).then(
 				(animal) => {
-					this.animal = animal;				
+					this.animal = animal;
 					this.animal.capture_date = moment(this.animal.capture_date).format('DD/MM/YYYY');
 					if (this.animal.death_date)
 						this.animal.death_date = moment(this.animal.death_date).format('DD/MM/YYYY');
@@ -152,7 +153,7 @@ export class AnimalFormComponent implements OnInit {
 						attribute.id_attribute = attribute.attribute.id_attribute;
 						delete attribute.attribute;
 					}
-					
+
 					delete attribute.attribute;
 					delete attribute.attribute_name;
 				});
@@ -165,18 +166,20 @@ export class AnimalFormComponent implements OnInit {
 				() => {
 					this.router.navigate([ '/animals' ]);
 				},
-				(error) => {					
-						window.scroll(0, 0);
-						let errors = error.error.error.errors;
-						if (errors.find((err) => err.name == 'attribute_already_exists')) {
-							this.animalForm.controls['name'].setErrors({ animal_already_exists: true });
-						}
-						else this.toastr.error('server_error');
+				(error) => {
+					window.scroll(0, 0);
+					let errors = error.error.error.errors;
+					if (errors.find((err) => err.name == 'attribute_already_exists')) {
+						this.animalForm.controls['name'].setErrors({ animal_already_exists: true });
+					} else this.toastr.error('server_error', '', { closeButton: true, disableTimeOut : true });
 				}
 			);
 		} else {
 			window.scroll(0, 0);
-			this.toastr.error('Attention!', 'Merci de remplir les champs correctement!');
+			this.toastr.error('Attention!', 'Merci de remplir les champs correctement!', {
+				closeButton: true,
+				disableTimeOut : true 
+			});
 		}
 	}
 
