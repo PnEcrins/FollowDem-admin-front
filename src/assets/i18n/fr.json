@@ -56,5 +56,7 @@
 	"confirm_delete_animal": "Êtes-vous sûr de vouloir supprimer cet animal",
 	"seprated_list_msg": "séparé par point-virgule",
 	"view": "voir",
-	"device_used_by_another_animal": "ce dispositif est utilisé par un autre animal"
+	"device_used_by_another_animal": "ce dispositif est utilisé par un autre animal",
+	"device_used": "impossible de supprimer ce dispositif car il est utilisé par un animal",
+	"animal_has_devices": "impossible de supprimer cet animal car il est associé à des dispositifs"
 }

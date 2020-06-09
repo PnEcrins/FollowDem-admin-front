@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DeviceService } from './devices.service';
 import { routerTransition } from '../../router.animations';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-devices',
@@ -15,7 +17,12 @@ export class DevicesComponent implements OnInit {
 	devices;
 	currentItem;
 	modelRef;
-	constructor(private deviceService: DeviceService, private modalService: NgbModal) {}
+	constructor(
+		private deviceService: DeviceService,
+		private toastr: ToastrService,
+		private translate: TranslateService,
+		private modalService: NgbModal
+	) {}
 
 	ngOnInit() {
 		this.setDevices();
@@ -37,10 +44,22 @@ export class DevicesComponent implements OnInit {
 	}
 
 	confirm() {
-		this.deviceService.delete(this.currentItem).then(() => {
-			this.setDevices();
-			this.modelRef.close();
-		});
+		this.deviceService.delete(this.currentItem).then(
+			() => {
+				this.setDevices();
+				this.modelRef.close();
+			},
+			(err) => {
+				let error_msg: string;
+				this.translate.get(err.error.msg).subscribe((msg) => {
+					error_msg = msg;
+					this.toastr.error(error_msg, '', {
+						closeButton: true,
+						disableTimeOut: true
+					});
+				});
+			}
+		);
 	}
 
 	ngOnDestroy(): void {

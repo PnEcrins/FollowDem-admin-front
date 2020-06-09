@@ -56,6 +56,8 @@
 	"confirm_delete_animal": "Are you sure you want to delete this animal",
 	"seprated_list_msg": "must be separated by a semicolon",
 	"view": "view",
-	"device_used_by_another_animal": "this device is used by another animal"
+	"device_used_by_another_animal": "this device is used by another animal",
+	"device_used": "cannot delete this device because it is used by an animal",
+	"animal_has_devices": "cannot delete this animal because it is associated with devices"
 
 }

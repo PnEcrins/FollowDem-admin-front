@@ -5,6 +5,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
 	selector: 'app-animals',
@@ -21,6 +23,8 @@ export class AnimalsComponent implements OnInit {
 		private animalService: AnimalsService,
 		private router: Router,
 		private modalService: NgbModal,
+		private toastr: ToastrService,
+		private translate: TranslateService,
 		private spinner: NgxSpinnerService
 	) {
 		this.setAnimals();
@@ -30,12 +34,24 @@ export class AnimalsComponent implements OnInit {
 		this.modelRef = this.modalService.open(content, { windowClass: 'confirm-delete-modal', centered: true });
 		this.currentItem = item;
 	}
-	
+
 	confirm() {
-		this.animalService.delete(this.currentItem).then((data) => {
-			this.setAnimals();
-			this.modelRef.close();
-		});
+		this.animalService.delete(this.currentItem).then(
+			(data) => {
+				this.setAnimals();
+				this.modelRef.close();
+			},
+			(err) => {
+				let error_msg: string;
+				this.translate.get(err.error.msg).subscribe((msg) => {
+					error_msg = msg;
+					this.toastr.error(error_msg, '', {
+						closeButton: true,
+						disableTimeOut: true
+					});
+				});
+			}
+		);
 	}
 	ngOnInit() {}
 

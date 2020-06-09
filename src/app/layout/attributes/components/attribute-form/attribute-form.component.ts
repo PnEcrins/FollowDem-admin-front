@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DeviceService } from '../../../devices/devices.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AttributesService } from '../../attributes.service';
 import { ToastrService } from 'ngx-toastr';
