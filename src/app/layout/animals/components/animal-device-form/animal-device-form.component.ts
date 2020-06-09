@@ -6,6 +6,7 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import _ from 'lodash';
 import { AnimalsService } from '../../animals.service';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'app-animal-device-form',
@@ -28,6 +29,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 	editDevice: boolean = false;
 	deviceToEdit: any;
 	id_animal: number;
+	now: any;
 
 	constructor(
 		private deviceService: DeviceService,
@@ -40,6 +42,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 	ngOnInit() {
 		this.id_animal = this.route.snapshot.params['id'];
 		if (!this.animal_devices) this.animal_devices = [];
+		this.now = this.dateParser.parse(moment().format('DD/MM/YYYY'));
 		this.deviceForm = this.fb.group({
 			device: [ null, Validators.required ],
 			date_start: [ null, Validators.required ],

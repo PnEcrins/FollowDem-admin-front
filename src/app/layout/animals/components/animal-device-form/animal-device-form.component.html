@@ -16,7 +16,7 @@
                         <div class="form-group">
                             <label class="with-required">{{'date_start' | translate}}</label>
                             <div class="input-group">
-                                <input FeedBack class="form-control" placeholder="yyyy-mm-dd" name="dp"
+                                <input FeedBack class="form-control" placeholder="dd/mm/yyyy" name="dp" [maxDate]="now"
                                     formControlName="date_start" ngbDatepicker #date_start="ngbDatepicker" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" (click)="date_start.toggle()" type="button">
@@ -30,7 +30,7 @@
                         <div class="form-group">
                             <label>{{'date_end' | translate}}</label>
                             <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [minDate]="startDate"
+                                <input class="form-control" placeholder="dd/mm/yyyy" name="dp" [maxDate]="now" [minDate]="startDate"
                                     formControlName="date_end" ngbDatepicker #date_end="ngbDatepicker">
                                 <div class="input-group-append">
                                     <button class="btn btn-outline-secondary" (click)="date_end.toggle()" type="button">
