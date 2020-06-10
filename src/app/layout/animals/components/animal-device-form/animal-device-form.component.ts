@@ -93,39 +93,46 @@ export class AnimalDeviceFormComponent implements OnInit {
 				this.deviceToEdit = null;
 				this.added_device.emit(this.animal_devices); // event update animal_device
 			} else {
-				this.animalsService.device_available(deviceOnSave.device.id_device, this.id_animal).then((devId) => {
-					if (devId.length > 0) {
-						this.addDeviceError = true;
-						this.alertMsg = 'device_used_by_another_animal';
-						this.closedAlertDevice = false;
-					} else {
-						// on add new device
-						deviceOnSave.ref_device = deviceOnSave.device.ref_device;
-						deviceOnSave.id_device = deviceOnSave.device.id_device;
-						deviceOnSave.date_start = this.dateParser.format(deviceOnSave.date_start);
-						if (deviceOnSave.date_end)
-							deviceOnSave.date_end = this.dateParser.format(deviceOnSave.date_end);
-						let device_exist = this.animal_devices.find((item) => {
-							return item.id_device == deviceOnSave.id_device;
-						});
-
-						// check if device is already added
-						if (device_exist) {
+				this.animalsService
+					.device_available(
+						deviceOnSave.device.id_device,
+						this.dateParser.format(deviceOnSave.date_start),
+						this.dateParser.format(deviceOnSave.date_end),
+						this.id_animal
+					)
+					.then((devId) => {
+						if (devId.length > 0) {
 							this.addDeviceError = true;
-							this.alertMsg = 'device_already_add';
+							this.alertMsg = 'device_used_by_another_animal';
 							this.closedAlertDevice = false;
 						} else {
-							delete deviceOnSave.device;
-							this.animal_devices.push(deviceOnSave);
-							// reset device form and init value
-							this.deviceForm.reset();
-							this.showDeviceForm = false;
-							this.closedAlertDevice = true;
-							this.deviceForm.controls['date_end'].disable();
-							this.added_device.emit(this.animal_devices); // event new animal_device
+							// on add new device
+							deviceOnSave.ref_device = deviceOnSave.device.ref_device;
+							deviceOnSave.id_device = deviceOnSave.device.id_device;
+							deviceOnSave.date_start = this.dateParser.format(deviceOnSave.date_start);
+							if (deviceOnSave.date_end)
+								deviceOnSave.date_end = this.dateParser.format(deviceOnSave.date_end);
+							let device_exist = this.animal_devices.find((item) => {
+								return item.id_device == deviceOnSave.id_device;
+							});
+
+							// check if device is already added
+							if (device_exist) {
+								this.addDeviceError = true;
+								this.alertMsg = 'device_already_add';
+								this.closedAlertDevice = false;
+							} else {
+								delete deviceOnSave.device;
+								this.animal_devices.push(deviceOnSave);
+								// reset device form and init value
+								this.deviceForm.reset();
+								this.showDeviceForm = false;
+								this.closedAlertDevice = true;
+								this.deviceForm.controls['date_end'].disable();
+								this.added_device.emit(this.animal_devices); // event new animal_device
+							}
 						}
-					}
-				});
+					});
 			}
 		}
 	}
