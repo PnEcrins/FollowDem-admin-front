@@ -24,7 +24,7 @@
 	"reference": "Référence",
 	"ref_device": "Référence",
 	"add_attribute": "Ajouter un attribut",
-	"list_attributes": " List des attributs",
+	"list_attributes": " Liste des attributs",
 	"attributes": "Attributs",
 	"attribute": "Attribut",
 	"attribute_type": "Type d'attributs",
@@ -38,7 +38,7 @@
 	"list_type_devices": "Liste des types de dispositif",
 	"add_type_device": "Ajouter un type de dispositif",
 	"cancel": "Annuler",
-	"animal_info": "Animal informations",
+	"animal_info": "Informations sur l'animal",
 	"no_data": "Aucune donnée n'est disponible",
 	"add": "Ajouter",
 	"save": "Enregistrer",
@@ -54,9 +54,9 @@
 	"confirm_delete_attribute": "Êtes-vous sûr de vouloir supprimer cet attribut",
 	"confirm_delete_device": "Êtes-vous sûr de vouloir supprimer ce dispositif",
 	"confirm_delete_animal": "Êtes-vous sûr de vouloir supprimer cet animal",
-	"seprated_list_msg": "séparé par point-virgule",
+	"seprated_list_msg": "séparées par des points-virgules",
 	"view": "voir",
-	"device_used_by_another_animal": "ce dispositif est utilisé par un autre animal. vous ne pouvez pas utiliser le même dispositif sur deux animaux en même temps",
-	"device_used": "impossible de supprimer ce dispositif car il est utilisé par un animal",
-	"animal_has_devices": "impossible de supprimer cet animal car il est associé à des dispositifs"
+	"device_used_by_another_animal": "Ce dispositif est utilisé par un autre animal. Vous ne pouvez pas utiliser le même dispositif sur deux animaux en même temps",
+	"device_used": "Impossible de supprimer ce dispositif car il est utilisé par un animal",
+	"animal_has_devices": "Impossible de supprimer cet animal car il est associé à des dispositifs"
 }
