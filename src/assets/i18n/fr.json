@@ -58,5 +58,12 @@
 	"view": "voir",
 	"device_used_by_another_animal": "Ce dispositif est utilisé par un autre animal. Vous ne pouvez pas utiliser le même dispositif sur deux animaux en même temps",
 	"device_used": "Impossible de supprimer ce dispositif car il est utilisé par un animal",
-	"animal_has_devices": "Impossible de supprimer cet animal car il est associé à des dispositifs"
+	"animal_has_devices": "Impossible de supprimer cet animal car il est associé à des dispositifs",
+	"required-field": "* Champs requis",
+	"type_already_exists": "Ce type de dispositif existe déjà",
+	"animal_already_exists": "Cet animal existe déjà",
+	"attirbute_already_exists": "Cet attribut existe déjà",
+	"device_already_exists": "Ce dispositif existe déjà",
+	"order_already_exists": "order_already_exists",
+	"invalid_year": "Invalide année"
 }
