@@ -19,6 +19,8 @@
                     </div>
                     <app-form-error controlName="birth_year" errorKey="required"></app-form-error>
                     <app-form-error controlName="birth_year" errorKey="pattern"></app-form-error>
+                    <app-form-error controlName="birth_year" errorKey="birth_year_error"></app-form-error>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -65,7 +67,7 @@
                 <hr>
                 <app-animal-attribute-form [viewMode]="false" [animal_attributes]="animal_attributes" (added_attributes)="onAddAttributes($event)"></app-animal-attribute-form>
                 <div  class="pr-3 d-flex justify-content-end">
-                    <button type="submit" (click)="onSave()" class="btn btn-success mr-3">{{'save'|translate}}</button>
+                    <button type="button" (click)="onSave()" class="btn btn-success mr-3">{{'save'|translate}}</button>
                     <button type="reset" [routerLink]="['/animals']" class="btn btn-secondary">
                         {{'cancel'|translate}}</button>
                 </div>

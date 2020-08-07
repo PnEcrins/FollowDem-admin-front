@@ -60,11 +60,12 @@
 	"device_used": "Cannot delete this device because it is used by an animal",
 	"animal_has_devices": "Cannot delete this animal because it is associated with devices",
 	"required-field": "* Required field",
-	"type_already_exists": "This type is already exists",
-	"animal_already_exists": "This animal is already exists",
-	"attirbute_already_exists": "This attribute is already exists",
-	"device_already_exists": "This device is already exists",
-	"order_already_exists": "This order is already exists",
-	"invalid_year": "Invalid year"
+	"type_already_exists": "This type already exists",
+	"animal_already_exists": "This animal already exists",
+	"attirbute_already_exists": "This attribute already exists",
+	"device_already_exists": "This device already exists",
+	"order_already_exists": "This order already exists",
+	"invalid_year": "Invalid year",
+	"birth_year_error": "Birth year must be less than capture date"
 
 }

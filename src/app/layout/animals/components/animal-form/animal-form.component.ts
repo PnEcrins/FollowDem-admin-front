@@ -4,10 +4,7 @@ import { AnimalsService } from '../../animals.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgbDatepickerI18n, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-import {
-	CustomDatepickerI18nService,
-
-} from '../../../../shared/services/custom-datepicker-i18n.service';
+import { CustomDatepickerI18nService } from '../../../../shared/services/custom-datepicker-i18n.service';
 import _ from 'lodash';
 import * as moment from 'moment';
 
@@ -15,10 +12,7 @@ import * as moment from 'moment';
 	selector: 'app-animal-form',
 	templateUrl: './animal-form.component.html',
 	styleUrls: [ './animal-form.component.scss' ],
-	providers: [
-		{ provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService },
-		
-	]
+	providers: [ { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService } ]
 })
 export class AnimalFormComponent implements OnInit {
 	animalForm: FormGroup;
@@ -176,8 +170,13 @@ export class AnimalFormComponent implements OnInit {
 	initFormListner() {
 		this.animalForm.controls['birth_year'].valueChanges.subscribe((value) => {
 			if (this.animalForm.controls['birth_year'].value) {
-				console.log('date', this.animalForm.controls['capture_date'].value);
-				
+				this.startCaptureDate = { year: value, month: 1, day: 1 };
+				if (
+					this.animalForm.controls['capture_date'].value &&
+					this.animalForm.controls['capture_date'].value.year < value
+				) {
+					this.animalForm.controls['birth_year'].setErrors({ birth_year_error: true });
+				}
 			}
 		});
 

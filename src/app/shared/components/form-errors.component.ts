@@ -10,20 +10,20 @@ export class FormErrorComponent {
 	@Input() controlName: string;
 	@Input() errorKey: string;
 	requiredFiled: string;
-  type_already_exists: any;
-  animal_already_exists: any;
-  attirbute_already_exists: any;
-  device_already_exists: any;
-  order_already_exists: any;
-  invalid_year: any;
+	type_already_exists: any;
+	animal_already_exists: any;
+	attirbute_already_exists: any;
+	device_already_exists: any;
+	order_already_exists: any;
+	invalid_year: any;
+	birth_year_error: any;
 
 	constructor(
 		@Host()
 		@SkipSelf()
 		private form: FormGroupDirective,
 		private translateService: TranslateService
-	) {
-	}
+	) {}
 
 	get isInvalid() {
 		const control = this.form.form.get(this.controlName);
@@ -31,14 +31,14 @@ export class FormErrorComponent {
 	}
 
 	get error_msg() {
-    this.translateService.get('required-field').subscribe((res) => (this.requiredFiled = res));
-    this.translateService.get('type_already_exists').subscribe((res) => (this.type_already_exists = res));
-    this.translateService.get('animal_already_exists').subscribe((res) => (this.animal_already_exists = res));
-    this.translateService.get('attirbute_already_exists').subscribe((res) => (this.attirbute_already_exists = res));
-    this.translateService.get('device_already_exists').subscribe((res) => (this.device_already_exists = res));
-    this.translateService.get('order_already_exists').subscribe((res) => (this.order_already_exists = res));
-    this.translateService.get('invalid_year').subscribe((res) => (this.invalid_year = res));
-
+		this.translateService.get('required-field').subscribe((res) => (this.requiredFiled = res));
+		this.translateService.get('type_already_exists').subscribe((res) => (this.type_already_exists = res));
+		this.translateService.get('animal_already_exists').subscribe((res) => (this.animal_already_exists = res));
+		this.translateService.get('attirbute_already_exists').subscribe((res) => (this.attirbute_already_exists = res));
+		this.translateService.get('device_already_exists').subscribe((res) => (this.device_already_exists = res));
+		this.translateService.get('order_already_exists').subscribe((res) => (this.order_already_exists = res));
+		this.translateService.get('invalid_year').subscribe((res) => (this.invalid_year = res));
+		this.translateService.get('birth_year_error').subscribe((res) => (this.birth_year_error = res));
 		if (this.controlName === 'login') {
 			if (this.errorKey === 'login') {
 				return 'Identifant incorrect';
@@ -94,6 +94,8 @@ export class FormErrorComponent {
 				return this.invalid_year;
 			} else if (this.errorKey === 'required') {
 				return this.requiredFiled;
+			} else if (this.errorKey === 'birth_year_error') {
+				return this.birth_year_error;
 			}
 		}
 

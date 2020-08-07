@@ -65,5 +65,6 @@
 	"attirbute_already_exists": "Cet attribut existe déjà",
 	"device_already_exists": "Ce dispositif existe déjà",
 	"order_already_exists": "order_already_exists",
-	"invalid_year": "Invalide année"
+	"invalid_year": "Invalide année",
+	"birth_year_error": "La date de naissance doit être inférieur à la date de capture"
 }
