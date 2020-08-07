@@ -37,28 +37,28 @@ export class FormErrorComponent {
     }
     if (this.controlName === 'device_type') {
       if (this.errorKey === 'type_already_exists') {
-        return ' ce type de dispositif existe déja';
+        return ' Ce type de dispositif existe déjà';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
     }
     if (this.controlName === 'name') {
       if (this.errorKey === 'animal_already_exists') {
-        return ' cet animal existe déja';
+        return ' Cet animal existe déjà';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
     }
     if (this.controlName === 'attribute') {
       if (this.errorKey === 'attirbute_already_exists') {
-        return ' cet attribut existe déja';
+        return ' Cet attribut existe déjà';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
     }
     if (this.controlName === 'ref_device') {
       if (this.errorKey === 'device_already_exists') {
-        return ' ce dispositif existe déja';
+        return ' Ce dispositif existe déjà';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
@@ -66,7 +66,7 @@ export class FormErrorComponent {
 
     if (this.controlName === 'order') {
       if (this.errorKey === 'order_already_exists') {
-        return ' cet ordre existe déja';
+        return ' Cet ordre existe déjà';
       } else if (this.errorKey === 'required') {
         return '* Champs requis';
       }
