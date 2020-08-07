@@ -57,39 +57,17 @@ export class AnimalFormComponent implements OnInit {
 			comment: [ null ]
 		});
 
-		this.animalForm.controls['birth_year'].valueChanges.subscribe((value) => {
-			if (this.animalForm.controls['birth_year'].value) {
-				this.startCaptureDate = { year: value, month: 1, day: 1 };
-				this.animalForm.controls['capture_date'].reset();
-				this.animalForm.controls['death_date'].reset();
-			}
-		});
-
-		this.animalForm.controls['capture_date'].statusChanges.subscribe(() => {
-			if (this.animalForm.controls['capture_date'].value) {
-				this.startDate = this.animalForm.controls['capture_date'].value;
-				this.animalForm.controls['death_date'].reset();
-				this.animalForm.controls['death_date'].clearValidators();
-				if (this.animalForm.enabled) this.animalForm.controls['death_date'].enable();
-			}
-		});
-
 		// Get current dive id from parms and set form
 		this.id = this.route.snapshot.params['id'];
 		if (this.id) {
 			this.animalsService.get_by_id(this.id).then(
 				(animal) => {
 					this.animal = animal;
-					this.animal.capture_date = moment(this.animal.capture_date).format('DD/MM/YYYY');
-					if (this.animal.death_date)
-						this.animal.death_date = moment(this.animal.death_date).format('DD/MM/YYYY');
 					this.animal_devices = animal.animal_devices;
 					this.animal_attributes = animal.animal_attributes;
 					this.animal_devices.forEach((item) => {
 						item.ref_device = item.device.ref_device;
 						item.id_device = item.device.id_device;
-						item.date_start = moment(item.date_start).format('DD/MM/YYYY');
-						if (item.date_end) item.date_end = moment(item.date_end).format('DD/MM/YYYY');
 					});
 					this.animal_attributes.forEach((item) => {
 						item.attribute_name = item.attribute.attribute;
@@ -106,6 +84,7 @@ export class AnimalFormComponent implements OnInit {
 		} else {
 			this.animal = null;
 			this.animalForm.reset();
+			this.initFormListner();
 		}
 	}
 
@@ -114,6 +93,8 @@ export class AnimalFormComponent implements OnInit {
 
 		this.animalForm.get('capture_date').setValue(this.dateParser.parse(this.animal.capture_date));
 		this.animalForm.get('death_date').setValue(this.dateParser.parse(this.animal.death_date));
+		if (this.animalForm.enabled) this.animalForm.controls['death_date'].enable();
+		this.initFormListner();
 	}
 
 	toDate(date): String {
@@ -171,14 +152,14 @@ export class AnimalFormComponent implements OnInit {
 					let errors = error.error.error.errors;
 					if (errors.find((err) => err.name == 'attribute_already_exists')) {
 						this.animalForm.controls['name'].setErrors({ animal_already_exists: true });
-					} else this.toastr.error('server_error', '', { closeButton: true, disableTimeOut : true });
+					} else this.toastr.error('server_error', '', { closeButton: true, disableTimeOut: true });
 				}
 			);
 		} else {
 			window.scroll(0, 0);
 			this.toastr.error('Attention!', 'Merci de remplir les champs correctement!', {
 				closeButton: true,
-				disableTimeOut : true 
+				disableTimeOut: true
 			});
 		}
 	}
@@ -190,5 +171,24 @@ export class AnimalFormComponent implements OnInit {
 	onAddAttributes(event) {
 		this.add_attributes = [];
 		this.add_attributes = _.cloneDeep(event);
+	}
+
+	initFormListner() {
+		this.animalForm.controls['birth_year'].valueChanges.subscribe((value) => {
+			if (this.animalForm.controls['birth_year'].value) {
+				this.startCaptureDate = { year: value, month: 1, day: 1 };
+				this.animalForm.controls['capture_date'].reset();
+				this.animalForm.controls['death_date'].reset();
+			}
+		});
+
+		this.animalForm.controls['capture_date'].statusChanges.subscribe(() => {
+			if (this.animalForm.controls['capture_date'].value) {
+				this.startDate = this.animalForm.controls['capture_date'].value;
+				this.animalForm.controls['death_date'].reset();
+				this.animalForm.controls['death_date'].clearValidators();
+				if (this.animalForm.enabled) this.animalForm.controls['death_date'].enable();
+			}
+		});
 	}
 }

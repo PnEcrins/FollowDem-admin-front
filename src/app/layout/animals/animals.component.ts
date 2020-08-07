@@ -62,11 +62,6 @@ export class AnimalsComponent implements OnInit {
 				const keys = [ 'name', 'birth_year', 'capture_date', 'death_date' ];
 				this.cols = keys;
 				this.animals = data;
-				this.animals.forEach((animal) => {
-					if (animal.capture_date) animal.capture_date = moment(animal.capture_date).format('DD/MM/YYYY');
-					if (animal.death_date) animal.death_date = moment(animal.death_date).format('DD/MM/YYYY');
-				});
-
 				this.spinner.hide();
 			},
 			(error) => {
