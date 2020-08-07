@@ -42,7 +42,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 	ngOnInit() {
 		this.id_animal = this.route.snapshot.params['id'];
 		if (!this.animal_devices) this.animal_devices = [];
-		this.now = this.dateParser.parse(moment().format('DD/MM/YYYY'));
+		this.now = this.dateParser.parse(moment().format('YYYY-MM-DD'));
 		this.deviceForm = this.fb.group({
 			device: [ null, Validators.required ],
 			date_start: [ null, Validators.required ],

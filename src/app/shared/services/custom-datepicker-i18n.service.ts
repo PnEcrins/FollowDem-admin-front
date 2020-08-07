@@ -55,7 +55,7 @@ export class CustomDatepickerI18nService extends NgbDatepickerI18n {
 	}
 }
 
-@Injectable()
+/* @Injectable()
 export class CustomDateParserFormatter extends NgbDateParserFormatter {
 
   readonly DELIMITER = '/';
@@ -81,3 +81,4 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     return result;
   }
 }
+ */

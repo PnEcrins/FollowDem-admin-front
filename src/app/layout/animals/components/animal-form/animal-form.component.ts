@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgbDatepickerI18n, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import {
 	CustomDatepickerI18nService,
-	CustomDateParserFormatter
+
 } from '../../../../shared/services/custom-datepicker-i18n.service';
 import _ from 'lodash';
 import * as moment from 'moment';
@@ -17,7 +17,7 @@ import * as moment from 'moment';
 	styleUrls: [ './animal-form.component.scss' ],
 	providers: [
 		{ provide: NgbDatepickerI18n, useClass: CustomDatepickerI18nService },
-		{ provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter }
+		
 	]
 })
 export class AnimalFormComponent implements OnInit {
@@ -42,7 +42,7 @@ export class AnimalFormComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.now = this.dateParser.parse(moment().format('DD/MM/YYYY'));
+		this.now = this.dateParser.parse(moment().format('YYYY-MM-DD'));
 		this.animalForm = this.fb.group({
 			name: [ null, Validators.required ],
 			birth_year: [
@@ -176,9 +176,8 @@ export class AnimalFormComponent implements OnInit {
 	initFormListner() {
 		this.animalForm.controls['birth_year'].valueChanges.subscribe((value) => {
 			if (this.animalForm.controls['birth_year'].value) {
-				this.startCaptureDate = { year: value, month: 1, day: 1 };
-				this.animalForm.controls['capture_date'].reset();
-				this.animalForm.controls['death_date'].reset();
+				console.log('date', this.animalForm.controls['capture_date'].value);
+				
 			}
 		});
 
