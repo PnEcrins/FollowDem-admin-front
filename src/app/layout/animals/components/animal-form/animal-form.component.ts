@@ -114,6 +114,7 @@ export class AnimalFormComponent implements OnInit {
 						device.id_device = device.device.id_device;
 						delete device.device;
 					}
+					delete device.tmpId;
 					delete device.ref_device;
 				});
 			}

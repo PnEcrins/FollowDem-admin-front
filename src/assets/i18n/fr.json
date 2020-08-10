@@ -66,5 +66,7 @@
 	"device_already_exists": "Ce dispositif existe déjà",
 	"order_already_exists": "order_already_exists",
 	"invalid_year": "Invalide année",
-	"birth_year_error": "La date de naissance doit être inférieur à la date de capture"
+	"birth_year_error": "La date de naissance doit être inférieur à la date de capture",
+	"conflit_devices_date": "Attention, veuillez vérifier que : L'animal sélectionné ne soit pas équipé de 2 dispositifs (identiques ou différents) sur une même période",
+	"device_used_by_anathor_animal":  "Attention, veuillez vérifier que : Le dispositif sélectionné ne soit pas déjà équipé sur un autre animal sur la même période"
 }

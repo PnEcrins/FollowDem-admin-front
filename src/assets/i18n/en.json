@@ -66,6 +66,8 @@
 	"device_already_exists": "This device already exists",
 	"order_already_exists": "This order already exists",
 	"invalid_year": "Invalid year",
-	"birth_year_error": "Birth year must be less than capture date"
+	"birth_year_error": "Birth year must be less than capture date",
+	"conflit_devices_date": "Warning, please verify that : Selected animal isn't equipped with 2 devices (either identical or different) on a same period",
+	"device_used_by_anathor_animal":  "Warning, please verify that : Selected device isn't equipped on another animal on a same period"
 
 }

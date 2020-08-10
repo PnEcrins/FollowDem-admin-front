@@ -48,12 +48,14 @@ export class AnimalsService {
 		return this.http.delete<any>(config.serverURL + '/api/animals', { params: body }).toPromise();
 	}
 
-	device_available(deviceId: number, startDate: any, endDate?: any, animalId?: number): Promise<any> {
+	device_available(deviceId: number, startDate: any, endDate?: any, animalId?: number, id_cor_ad?: number): Promise<any> {
 		let params = new HttpParams();
 		if (animalId) params = params.append('animalId', animalId.toString());
+		if (animalId) params = params.append('animalId', animalId.toString());
+		if (id_cor_ad) params = params.append('id_cor_ad', id_cor_ad.toString());
 		if (endDate) params = params.append('endDate', endDate.toString());
 		params = params.append('deviceId', deviceId.toString());
 		params = params.append('startDate', startDate.toString());
-		return this.http.get<any>(config.serverURL + '/api/animals/device_available', { params: params }).toPromise();
+		return this.http.get<any>(config.serverURL + '/api/animals/devices/date_available', { params: params }).toPromise();
 	}
 }

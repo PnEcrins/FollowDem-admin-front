@@ -30,6 +30,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 	deviceToEdit: any;
 	id_animal: number;
 	now: any;
+	tmpId: number;
 
 	constructor(
 		private deviceService: DeviceService,
@@ -40,6 +41,7 @@ export class AnimalDeviceFormComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
+		this.tmpId = 0;
 		this.id_animal = this.route.snapshot.params['id'];
 		if (!this.animal_devices) this.animal_devices = [];
 		this.now = this.dateParser.parse(moment().format('YYYY-MM-DD'));
@@ -69,24 +71,24 @@ export class AnimalDeviceFormComponent implements OnInit {
 	}
 
 	onSaveDevice(deviceOnSave) {
+	
 		if (this.deviceForm.valid) {
+			let id_cor_ad = null;
+			if (this.deviceToEdit) { id_cor_ad = this.deviceToEdit.id_cor_ad; }
 			this.animalsService
 				.device_available(
 					this.deviceForm.get('device').value.id_device,
 					this.dateParser.format(deviceOnSave.date_start),
 					this.dateParser.format(deviceOnSave.date_end),
-					this.id_animal
+					this.id_animal,
+					id_cor_ad
 				)
-				.then((devId) => {
-					if (devId.length > 0) {
-						this.addDeviceError = true;
-						this.alertMsg = 'device_used_by_another_animal';
-						this.closedAlertDevice = false;
-					} else {
+				.then(
+					(devId) => {
 						if (this.editDevice) {
 							// find and update device
-							let indexDevice = this.animal_devices.findIndex((device) => {
-								return device.id_device == this.deviceToEdit.id_device;
+							const indexDevice = this.animal_devices.findIndex((device) => {
+								return device.tmpId === this.deviceToEdit.tmpId;
 							});
 							this.deviceToEdit.date_start = this.dateParser.format(deviceOnSave.date_start);
 							this.deviceToEdit.comment = deviceOnSave.comment;
@@ -109,36 +111,33 @@ export class AnimalDeviceFormComponent implements OnInit {
 							// on add new device
 							deviceOnSave.ref_device = deviceOnSave.device.ref_device;
 							deviceOnSave.id_device = deviceOnSave.device.id_device;
+							deviceOnSave.tmpId = this.tmpId++;
 							deviceOnSave.date_start = this.dateParser.format(deviceOnSave.date_start);
 							if (deviceOnSave.date_end)
 								deviceOnSave.date_end = this.dateParser.format(deviceOnSave.date_end);
-							let device_exist = this.animal_devices.find((item) => {
-								return item.id_device == deviceOnSave.id_device;
-							});
-
-							// check if device is already added
-							if (device_exist) {
-								this.addDeviceError = true;
-								this.alertMsg = 'device_already_add';
-								this.closedAlertDevice = false;
-							} else {
-								delete deviceOnSave.device;
-								this.animal_devices.push(deviceOnSave);
-								// reset device form and init value
-								this.deviceForm.reset();
-								this.showDeviceForm = false;
-								this.closedAlertDevice = true;
-								this.deviceForm.controls['date_end'].disable();
-								this.added_device.emit(this.animal_devices); // event new animal_device
-							}
+							delete deviceOnSave.device;
+							this.animal_devices.push(deviceOnSave);
+							// reset device form and init value
+							this.deviceForm.reset();
+							this.showDeviceForm = false;
+							this.closedAlertDevice = true;
+							this.deviceForm.controls['date_end'].disable();
+							this.added_device.emit(this.animal_devices); // event new animal_device
 						}
+					},
+					(error) => {
+						this.addDeviceError = true;
+						this.alertMsg = error.error;
+						this.closedAlertDevice = false;
 					}
-				});
+				);
 		}
 	}
 
 	onEditDevice(deviceToEdit: any) {
 		this.editDevice = true;
+		console.log('deviceToEdit', deviceToEdit);
+		
 		this.deviceToEdit = deviceToEdit;
 		let indexDevice = this.devices.findIndex((device) => {
 			return device.id_device == deviceToEdit.id_device;
@@ -154,8 +153,10 @@ export class AnimalDeviceFormComponent implements OnInit {
 	}
 
 	onDeleteDevice(deviceToDelete: any) {
+		console.log('deviceToDelete', deviceToDelete);
+
 		this.animal_devices = _.remove(this.animal_devices, (device: any) => {
-			return deviceToDelete.ref_device != device.ref_device;
+			return deviceToDelete.tmpId !== device.tmpId;
 		});
 		this.added_device.emit(this.animal_devices);
 	}
