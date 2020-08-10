@@ -5,7 +5,7 @@
 	"Log Out": "Log Out",
 	"animals": "Animals",
 	"birth_year": "Birth year",
-	"capture_date": "Capture date",
+	"capture_date": "The first capture date",
 	"death_date": "Death date",
 	"id": "Identifier",
 	"id_device_type": "Identifier",
@@ -67,7 +67,9 @@
 	"order_already_exists": "This order already exists",
 	"invalid_year": "Invalid year",
 	"birth_year_error": "Birth year must be less than capture date",
-	"conflit_devices_date": "Warning, please verify that : Selected animal isn't equipped with 2 devices (either identical or different) on a same period",
-	"device_used_by_anathor_animal":  "Warning, please verify that : Selected device isn't equipped on another animal on a same period"
+	"conflict_capture_date": "The start date must be greater than the capture date",
+	"conflict_death_date": "Warning conflict date, please check the start and end dates against the dead date",
+	"conflit_devices_date": "Warning, please verify that selected animal isn't equipped with 2 devices (either identical or different) on a same period",
+	"device_used_by_anathor_animal":  "Warning, please verify that selected device isn't equipped on another animal on a same period"
 
 }

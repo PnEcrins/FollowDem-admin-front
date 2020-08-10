@@ -62,7 +62,7 @@
                 </div>
                 <h4># {{'Devices'| translate}}</h4>
                 <hr>
-                <app-animal-device-form [viewMode]="false" [animal_devices]="animal_devices"  (added_device)="onAddDevice($event)"></app-animal-device-form>
+                <app-animal-device-form [viewMode]="false" [capture_date]="animalForm.controls['capture_date'].value" [death_date]="animalForm.controls['death_date'].value"  [animal_devices]="animal_devices"  (added_device)="onAddDevice($event)"></app-animal-device-form>
                 <h4># {{'attributes'| translate}}</h4>
                 <hr>
                 <app-animal-attribute-form [viewMode]="false" [animal_attributes]="animal_attributes" (added_attributes)="onAddAttributes($event)"></app-animal-attribute-form>

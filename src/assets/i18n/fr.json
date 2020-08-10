@@ -5,7 +5,7 @@
 	"Log Out": "Deconnexion",
 	"animals": "Animaux",
 	"birth_year": "Année de naissance",
-	"capture_date": "Date de capture",
+	"capture_date": "Date de la première capture",
 	"death_date": "Date de mort",
 	"id": "Identifiant",
 	"id_device_type": "Identifiant",
@@ -67,6 +67,8 @@
 	"order_already_exists": "order_already_exists",
 	"invalid_year": "Invalide année",
 	"birth_year_error": "La date de naissance doit être inférieur à la date de capture",
-	"conflit_devices_date": "Attention, veuillez vérifier que : L'animal sélectionné ne soit pas équipé de 2 dispositifs (identiques ou différents) sur une même période",
-	"device_used_by_anathor_animal":  "Attention, veuillez vérifier que : Le dispositif sélectionné ne soit pas déjà équipé sur un autre animal sur la même période"
+	"conflict_capture_date": "La date de début doit être supérieur à la date de capture",
+	"conflict_death_date": "Attention conflit de dates, veuillez vérifier les dates de début et de la fin par rapport à la date mort",
+	"conflit_devices_date": "Attention, veuillez vérifier que l'animal sélectionné ne soit pas équipé de 2 dispositifs (identiques ou différents) sur une même période",
+	"device_used_by_anathor_animal":  "Attention, veuillez vérifier que le dispositif sélectionné ne soit pas déjà équipé sur un autre animal sur la même période"
 }
