@@ -200,7 +200,7 @@ export class AnimalDeviceFormComponent implements OnInit, OnChanges {
 			this.closedAlertDevice = false;
 			return false;
 		}
-		if (death_date && (d1start > death_date || d1end > death_date)) {
+		if (death_date && d1start > death_date) {
 			this.addDeviceError = true;
 			this.alertMsg = 'conflict_death_date';
 			this.closedAlertDevice = false;
