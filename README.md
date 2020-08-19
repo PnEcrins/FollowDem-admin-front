@@ -1,7 +1,6 @@
 # FollowDem Admin
 
-Simple Dashboard Admin App built using Angular 6 and Bootstrap 4
-
+Simple Dashboard Admin App built using Angular 6 and Bootstrap 4. Frontend of https://github.com/PnEcrins/FollowDem-admin.
 
 # Installation
 
@@ -21,35 +20,29 @@ Simple Dashboard Admin App built using Angular 6 and Bootstrap 4
    npm install 
    ```
 
-
-
 # Configuration
 
-1. ##### Copier le template du ficher settings
+1. ##### Copier le template du fichier de configuration
 
    ```
    cp src/app/settings.ts.tpl src/app/settings.ts.tpl
    ```
 
-2. ##### Edit le ficheir et renseigner les paramètres selon votre contexte
+2. ##### Editer le fichier et renseigner les paramètres selon votre contexte
 
+- Vérifier que la variable ``serverURL`` contient les bonnes informations de connexion à l'API
+- ``APP_FLW_ID`` correspond à l'id de l'application dans UsersHub
 
-
-# build app
+# Build app
 
 ```
 ng build --prod --base-href <your base url for the application being built>
 ```
 
-> *L'option --base-href permet de configurer l'url de l'application*
+*L'option ``--base-href`` permet de configurer l'URL de l'application*
 
-
-
-## Mode developpement
+## Mode développement
 
 ```
 ng serve
 ```
-
-
-
